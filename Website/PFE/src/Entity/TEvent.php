@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TEvent
  *
  * @ORM\Table(name="t_event", uniqueConstraints={@ORM\UniqueConstraint(name="idEvent_UNIQUE", columns={"idEvent"})}, indexes={@ORM\Index(name="fk_t_event_t_user1_idx", columns={"fkUser"}), @ORM\Index(name="fk_t_event_t_event1", columns={"fkLinkedEvent"}), @ORM\Index(name="fk_t_event_t_day1_idx", columns={"fkDay"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  */
 class TEvent
 {
@@ -87,7 +87,7 @@ class TEvent
     private $eveendtime;
 
     /**
-     * @var \TDay
+     * @var int
      *
      * @ORM\ManyToOne(targetEntity="TDay")
      * @ORM\JoinColumns({
@@ -97,7 +97,7 @@ class TEvent
     private $fkday;
 
     /**
-     * @var \TEvent
+     * @var int
      *
      * @ORM\ManyToOne(targetEntity="TEvent")
      * @ORM\JoinColumns({
@@ -107,7 +107,7 @@ class TEvent
     private $fklinkedevent;
 
     /**
-     * @var \TUser
+     * @var int
      *
      * @ORM\ManyToOne(targetEntity="TUser")
      * @ORM\JoinColumns({
@@ -252,7 +252,7 @@ class TEvent
         return $this;
     }
 
-    public function getFkday(): ?TDay
+    public function getFkday(): ?int
     {
         return $this->fkday;
     }
@@ -264,7 +264,7 @@ class TEvent
         return $this;
     }
 
-    public function getFklinkedevent(): ?self
+    public function getFklinkedevent(): ?int
     {
         return $this->fklinkedevent;
     }
@@ -276,7 +276,7 @@ class TEvent
         return $this;
     }
 
-    public function getFkuser(): ?TUser
+    public function getFkuser(): ?int
     {
         return $this->fkuser;
     }

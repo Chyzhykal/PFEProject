@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TParticipant
  *
  * @ORM\Table(name="t_participant", uniqueConstraints={@ORM\UniqueConstraint(name="idParticipant_UNIQUE", columns={"idParticipant"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ParticipantRepository")
  */
 class TParticipant
 {

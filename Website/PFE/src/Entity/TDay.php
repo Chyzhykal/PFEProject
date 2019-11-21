@@ -16,7 +16,7 @@ class TDay
      * @var int
      *
      * @ORM\Column(name="idDay", type="integer", nullable=false)
-     * @ORM\
+     * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idday;
@@ -48,6 +48,59 @@ class TDay
      * @ORM\Column(name="dayEndTime", type="string", length=45, nullable=false)
      */
     private $dayendtime;
+
+    public function getIdday(): ?int
+    {
+        return $this->idday;
+    }
+
+    public function getDayname(): ?string
+    {
+        return $this->dayname;
+    }
+
+    public function setDayname(string $dayname): self
+    {
+        $this->dayname = $dayname;
+
+        return $this;
+    }
+
+    public function getDaydate(): ?string
+    {
+        return $this->daydate;
+    }
+
+    public function setDaydate(string $daydate): self
+    {
+        $this->daydate = $daydate;
+
+        return $this;
+    }
+
+    public function getDaybegintime(): ?string
+    {
+        return $this->daybegintime;
+    }
+
+    public function setDaybegintime(string $daybegintime): self
+    {
+        $this->daybegintime = $daybegintime;
+
+        return $this;
+    }
+
+    public function getDayendtime(): ?string
+    {
+        return $this->dayendtime;
+    }
+
+    public function setDayendtime(string $dayendtime): self
+    {
+        $this->dayendtime = $dayendtime;
+
+        return $this;
+    }
 
 
 }
