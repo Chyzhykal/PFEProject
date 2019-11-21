@@ -31,9 +31,9 @@ class HomeController extends AbstractController
         
  
          $guestForm = $this->createFormBuilder()
-             ->add('task', TextType::class)
-             ->add('dueDate', DateType::class)
-             ->add('save', SubmitType::class, ['label' => 'Create Task'])
+             ->add('firstname', TextType::class)
+             ->add('lastname', TextType::class)
+             ->add('begin', SubmitType::class, ['label' => 'Commencer'])
              ->getForm();
  
 

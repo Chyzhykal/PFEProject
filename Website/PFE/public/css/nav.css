@@ -13,13 +13,13 @@
 
 
 
-.navLink {
+.navLink, .navTitleLi {
     border:none;
     padding-bottom: 7px;
     margin: 20px;
 }
 
-.navcore>li:hover {
+.navLink:hover {
     transition: all 0.4s;
 	-webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
@@ -29,7 +29,7 @@
 }
 
 .navTitleLi {
-  
+    
 }
 
 .navButton{
@@ -55,7 +55,12 @@
     outline: none;
 }
 
-.navitem2a:hover, .navitema:hover, .navtitle:hover {
+.navtitle:hover{
+    text-decoration: none;
+    color: rgb(80, 80, 80);
+}
+
+.navitem2a:hover, .navitema:hover {
     text-decoration: none;
     color: #72BB53;
 }
