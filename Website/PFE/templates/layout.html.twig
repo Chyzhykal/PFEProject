@@ -1,0 +1,55 @@
+{#
+   This is the base template of the all backend pages. Since this layout is similar
+   to the global layout, we inherit from it to just change the contents of some
+   blocks. In practice, backend templates are using a three-level inheritance,
+   showing how powerful, yet easy to use, is Twig's inheritance mechanism.
+   See https://symfony.com/doc/current/book/templating.html#template-inheritance-and-layouts
+#}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    
+    <link rel="stylesheet" type="text/css" href={{asset('css/nav.css')}}>
+    <link rel="stylesheet" href={{asset('css/bootstrap/bootstrap.min.css')}}>
+
+    <link rel="stylesheet" href={{asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}>
+    <link rel="stylesheet" href={{asset('fonts/Linearicons-Free-v1.0.0/icon-font.min.css')}}>
+    <link rel="stylesheet" href={{asset('vindor/animate/animate.css')}}>
+    <link rel="stylesheet" href={{asset('vindor/css-hamburgers/hamburgers.min.css')}}>
+    <link rel="stylesheet" href={{asset('vindor/animsition/css/animsition.min.css')}}>
+    <link rel="stylesheet" href={{asset('vindor/select2/select2.min.css')}}>
+    <link rel="stylesheet" href={{asset('vindor/daterangepicker/daterangepicker.css')}}>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src={{asset('js/jquery-3.4.1.js')}}></script>
+
+    <script src={{asset('vindor/animsition/js/animsition.min.js')}}></script>
+    <script src={{asset('vindor/bootstrap/js/popper.js')}}></script>
+    <script src={{asset('js/bootstrap.min.js')}}></script>
+
+    <script src={{asset('vindor/daterangepicker/moment.min.js')}}></script>
+    <script src={{asset('vindor/daterangepicker/daterangepicker.js')}}></script>
+    <script src={{asset('vindor/select2/select2.min.js')}}></script>
+
+    <script src={{asset('vindor/countdowntime/countdowntime.js')}}></script>
+
+
+	<script src={{asset('js/main.js')}}></script>
+{% endblock %}
+
+{% block header_navigation_links %}
+    <link rel="stylesheet" type="text/css" href="css/nav.css">
+    <nav class="navig">
+            <ul class="navcore">
+                <li class="navTitleLi" ><a class="navtitle" href="index.php">JOURNEE PEDAGOGIQUE</a></li>
+                <li class="navLink active"><a class="navitema" href="#">Accuiel</a></li>
+                <li class="navLink"><a class="navitema" href="index.php">Calendrier</a></li>
+                <li class="navLink"><a class="navitema" href="#">FAQ</a></li>
+                <li class="navButton"><a class="navitem2a" href="#">Créer un événement</a></li>
+            </ul>
+    </nav>
+{% endblock %}

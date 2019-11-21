@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Journée pédagogique{% endblock %}</title>
+        {% block stylesheets %}
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href={{asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}>
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href={{asset('fonts/Linearicons-Free-v1.0.0/icon-font.min.css')}}>
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href={{asset('vindor/animate/animate.css')}}>
+    <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href={{asset('vindor/css-hamburgers/hamburgers.min.css')}}>
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href={{asset('vindor/animsition/css/animsition.min.css')}}>
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href={{asset('vindor/select2/select2.min.css')}}>
+    <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href={{asset('vindor/daterangepicker/daterangepicker.css')}}>
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href={{asset('css/util.css')}}>
+
+        <link rel="stylesheet" type="text/css" href={{asset('css/main.css')}}>
+        {% endblock %}
+    </head>
+    <body>
+        {% block header_navigation_links %}{% endblock %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+        {% endblock %}
+    </body>
+</html>
