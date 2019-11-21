@@ -28,9 +28,7 @@ class HomeController extends AbstractController
     public function Home(Request $request)
     {
          // creates a task object and initializes some data for this example
-         $task = new Task();
-         $task->setTask('B');
-         $task->setDueDate(new \DateTime('tomorrow'));
+        
  
          $guestForm = $this->createFormBuilder()
              ->add('task', TextType::class)
