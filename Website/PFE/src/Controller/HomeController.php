@@ -23,13 +23,11 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 class HomeController extends AbstractController
 {
     /**
-    * @Route("/")
+    * @Route("/" , name="index")
     */
     public function Home(Request $request)
     {
          // creates a task object and initializes some data for this example
-        
- 
          $guestForm = $this->createFormBuilder()
              ->add('firstname', TextType::class)
              ->add('lastname', TextType::class)
@@ -41,18 +39,23 @@ class HomeController extends AbstractController
             'form' => $guestForm->createView(),
         ]);
     }
+
     /**
-    * @Route("/calendar")
+    * @Route("/calendar", name="calendar")
     */
     public function Calendar(Request $request)
     {
-        
+        return $this->render('home/calendar.html.twig', [
+           
+        ]);
     }
     /**
-    * @Route("/faq")
+    * @Route("/faq", name="faq")
     */
     public function Faq(Request $request)
     {
-    
+        return $this->render('home/faq.html.twig', [
+           
+        ]);
     }
 }

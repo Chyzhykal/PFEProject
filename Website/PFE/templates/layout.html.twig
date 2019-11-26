@@ -9,8 +9,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    
-    <link rel="stylesheet" type="text/css" href={{asset('css/nav.css')}}>
+
     <link rel="stylesheet" href={{asset('css/bootstrap/bootstrap.min.css')}}>
 
     <link rel="stylesheet" href={{asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}>
@@ -21,6 +20,9 @@
     <link rel="stylesheet" href={{asset('vindor/select2/select2.min.css')}}>
     <link rel="stylesheet" href={{asset('vindor/daterangepicker/daterangepicker.css')}}>
 
+    <link rel="stylesheet" type="text/css" href={{asset('css/util.css')}}>
+    <link rel="stylesheet" type="text/css" href={{asset('css/main.css')}}>
+    <link rel="stylesheet" type="text/css" href={{asset('css/nav.css')}}>
 {% endblock %}
 
 {% block javascripts %}
@@ -41,14 +43,14 @@
 	<script src={{asset('js/main.js')}}></script>
 {% endblock %}
 
-{% block header_navigation_links %}
-    <link rel="stylesheet" type="text/css" href="css/nav.css">
+{% block nav %}
+    {{ parent() }}
     <nav class="navig">
             <ul class="navcore">
-                <li class="navTitleLi" ><a class="navtitle" href="index.php">JOURNEE PEDAGOGIQUE</a></li>
-                <li class="navLink active"><a class="navitema" href="#">Accuiel</a></li>
-                <li class="navLink"><a class="navitema" href="index.php">Calendrier</a></li>
-                <li class="navLink"><a class="navitema" href="#">FAQ</a></li>
+                <li class="navTitleLi" ><a class="navtitle" href={{ path('index')}}>JOURNEE PEDAGOGIQUE</a></li>
+                <li class="navLink active"><a class="navitema" href={{ path('index')}}>Accuiel</a></li>
+                <li class="navLink"><a class="navitema" href={{ path('calendar')}}>Calendrier</a></li>
+                <li class="navLink"><a class="navitema" href={{ path('faq')}}>FAQ</a></li>
                 <li class="navButton"><a class="navitem2a" href="#">Créer un événement</a></li>
             </ul>
     </nav>

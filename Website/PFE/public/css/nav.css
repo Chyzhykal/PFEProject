@@ -1,44 +1,37 @@
 .navig{
     margin:0;
     border:0;
+    position: relative;
+    height: fit-content;
 }
 
 .navcore{
     display: -ms-flexbox;
-    display: flex;
     padding-left: 0;
     margin-bottom: 0;
     list-style: none;
+    position: relative;
 }
 
-
+.navcore>li{
+    display: block;
+}
 
 .navLink, .navTitleLi {
     border:none;
     padding-bottom: 7px;
     margin: 20px;
-}
-
-.navLink:hover {
-    transition: all 0.4s;
-	-webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    padding-bottom: 6px;
-    border-bottom:1px solid #72BB53;
-}
-
-.navTitleLi {
-    
+    float:left;
 }
 
 .navButton{
-    text-align: right;
-    border: 2px solid #72BB53;
-    margin:10px;
-    padding:6px;
-    border-radius: 5px;
+    margin:20px;
+    float:right;
+    margin-right: 60px;
+    background-color: transparent;
 }
+
+
 
 .navitema, .navitem2a, .navtitle{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -55,18 +48,43 @@
     outline: none;
 }
 
+.navitem2a{
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 3px;
+    background-color: rgba(114, 187, 83, 0.671);
+    border: 1px solid rgba(114, 187, 83, 0.096);
+    padding-bottom: 15px;
+}
+
 .navtitle:hover{
     text-decoration: none;
     color: rgb(80, 80, 80);
 }
 
-.navitem2a:hover, .navitema:hover {
+.navitema:hover {
     text-decoration: none;
+    outline: none;
     color: #72BB53;
+    transition: all 0.2s;
+	-webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    padding-bottom: 6px;
+    border-bottom:1px solid #72BB53;
+}
+
+.navitem2a:hover {
+    text-decoration: none;
+    outline: none;
+    background-color: inherit;
+    border: 1px solid rgb(114, 187, 83);
+    color: white;
 }
 
 .navitem2a:focus, .navitema:focus, .navtitle:focus {
-	outline: none;
+    outline: none;
+    text-decoration: none;
 }
 
 .navitem2a:active, .navitema:active, .navtitle:active {
