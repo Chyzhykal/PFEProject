@@ -9,9 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="t_user", uniqueConstraints={@ORM\UniqueConstraint(name="idUser_UNIQUE", columns={"idUser"})})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- */
+ */ 
 class TUser
 {
+
     /**
      * @var int
      *
@@ -140,5 +141,5 @@ class TUser
         return $this;
     }
 
-
+   
 }

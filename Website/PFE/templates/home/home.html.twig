@@ -1,36 +1,27 @@
 {% extends 'layout.html.twig' %}
 {% block body %}
-<link rel="stylesheet" type="text/css" href={{asset('css/login.css')}}>
 <div class="limiter">
     <div class="visitLogin">
         <div class="wrapVisitLogin p-b-160 p-t-50">
-            <form class="visitLoginForm login100-form validate-form">
-                <span class="visitLoginFormTitle p-b-43">
-                     <h1>Home</h1>
-                </span>
-                {{ form_start(form, {'method': 'GET'}) }}
+               {{ form_start(form, {'method': 'GET' , 'attr':{'class': 'visitLoginForm login100-form validate-form'}}) }}
+                    <span class="visitLoginFormTitle p-b-43">
+                        <h1>S'inscrire au journée:</h1>
+                    </span>
                     <div class="my-custom-class-for-errors">
                         {{ form_errors(form) }}
                     </div>
-
-
                     <div class="wrap-input100 textInputLogin rs1 validate-input" data-validate = "Username is required">
                         {{ form_widget(form.firstname, { 'attr': {'class': 'input1 inputLogin input100'} }) }}
                         <span class="label-inputLogin label-input100">Votre Prénom</span>
                     </div>
-                    
-                    
                     <div class="wrap-input100 textInputLogin rs2 validate-input" data-validate="C'est un champ obligatoire">
                         {{ form_widget(form.lastname, { 'attr': {'class': 'input1 inputLogin input100'} }) }}
                         <span class="label-inputLogin label-input100">Votre Nom</span>
                     </div>
-
                     <div class="loginBtn">
                         {{ form_widget(form.begin, { 'attr': {'class': 'submit1 submitLoginBtn'} }) }}
                     </div>
                 {{ form_end(form) }}
-               
-            </form>
         </div>
     </div>
 </div>

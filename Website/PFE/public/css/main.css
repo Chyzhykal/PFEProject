@@ -4,4 +4,5 @@ body{
     background: -o-linear-gradient(left, #2F073B, #2575fc);
     background: -moz-linear-gradient(left, #2F073B, #2575fc);
     background: linear-gradient(left, #2F073B, #2575fc);
+    min-height: 100%;
 }

@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href={{asset('css/util.css')}}>
     <link rel="stylesheet" type="text/css" href={{asset('css/main.css')}}>
     <link rel="stylesheet" type="text/css" href={{asset('css/nav.css')}}>
+    <link rel="stylesheet" type="text/css" href={{asset('css/footer.css')}}>
 {% endblock %}
 
 {% block javascripts %}
@@ -39,7 +40,7 @@
 
     <script src={{asset('vindor/countdowntime/countdowntime.js')}}></script>
 
-
+    <link rel="stylesheet" type="text/css" href={{asset('css/login.css')}}>
 	<script src={{asset('js/main.js')}}></script>
 {% endblock %}
 
@@ -51,7 +52,16 @@
                 <li class="navLink active"><a class="navitema" href={{ path('index')}}>Accuiel</a></li>
                 <li class="navLink"><a class="navitema" href={{ path('calendar')}}>Calendrier</a></li>
                 <li class="navLink"><a class="navitema" href={{ path('faq')}}>FAQ</a></li>
-                <li class="navButton"><a class="navitem2a" href="#">Créer un événement</a></li>
+                <li class="navButton"><a class="navitem2a" href={{ path('login')}}>Créer un événement</a></li>
             </ul>
+    </nav>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+    <footer class="foot">
+        <p class="footText footText1">Créé par Chyzhyk Aleh pour le projet "Journée pédagogique"</p>
+        <p class="footText">05.12.2019</p>
+        <p class="footText">ETML</p>
     </nav>
 {% endblock %}
