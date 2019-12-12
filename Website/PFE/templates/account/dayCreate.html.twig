@@ -1,0 +1,15 @@
+{% extends 'layoutAdmin.html.twig' %}
+{% block body %}
+<div class="limiter">
+    <div class="visitLogin">
+        <div class="wrapVisitLogin p-b-160 p-t-50">
+            <ul class="adminMenu">
+                <li class="adminButton1" ><a class="navtitle" href={{ path('admin')}}>JOURNEE PEDAGOGIQUE</a></li>
+                <li class="adminButton1"><a class="navitema" href={{ path('admin')}}>Accuiel</a></li>
+                <li class="adminButton1"><a class="navitema" href={{ path('calendar')}}>Calendrier</a></li>
+                <li class="adminButton1"><a class="navitem2a" href={{ path('login')}}>Se deconnecter</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

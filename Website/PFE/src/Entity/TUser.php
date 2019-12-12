@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * TUser
@@ -26,6 +27,8 @@ class TUser
      * @var string
      *
      * @ORM\Column(name="useLogin", type="string", length=100, nullable=false)
+     * @Assert\NotBlank
+     * @Assert\Type("string")
      */
     private $uselogin;
 
@@ -33,6 +36,8 @@ class TUser
      * @var string
      *
      * @ORM\Column(name="usePwd", type="string", length=255, nullable=false)
+     * @Assert\NotBlank
+     * @Assert\Type("string")
      */
     private $usepwd;
 

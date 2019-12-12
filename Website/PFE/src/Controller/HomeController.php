@@ -19,9 +19,23 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class HomeController extends AbstractController
 {
+    private $session;
+
+    /**
+     * Constructor
+     *
+     * @param SessionInterface $session
+     */
+    public function __construct(SessionInterface $session)
+    {
+        //TODO : Active class changement for links in twig
+        $this->session = $session;
+    }
+
     /**
     * @Route("/" , name="index")
     */
