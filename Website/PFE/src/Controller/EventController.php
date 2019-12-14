@@ -27,7 +27,7 @@ class EventController extends AbstractController
     public function index()
     {
         if($this->session->get('loggedin')){
-            return $this->render('days/agenda.html.twig', [
+            return $this->render('events/theming.html.twig', [
             ]);
         }
         
@@ -35,7 +35,7 @@ class EventController extends AbstractController
       /**
      * @Route("/new-event", name="newevent")
      */
-    public function addEvent(Request $request)
+  /*  public function addEvent(Request $request)
     {
         $event = new TempEvent();
         
@@ -46,8 +46,7 @@ class EventController extends AbstractController
             
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
-            $user = $form->getData(); 
-            $pwd = $user->getUsepwd();
+            $event = $form->getData(); 
 
             
             // $user->setUsepwd(password_hash($user->getUsepwd(),PASSWORD_BCRYPT));
@@ -82,7 +81,7 @@ class EventController extends AbstractController
             'form' => $form->createView(),
             'errors'=>$errors,
         ]);
-    }
+    }*/
 
     /**
      * @Route("/remove-event", name="removeEvent")

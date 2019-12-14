@@ -36,7 +36,7 @@ class DayController extends AbstractController
     /**
      * @Route("/new-day", name="newday")
      */
-    public function addDay(Request $request)
+    /*public function addDay(Request $request)
     {
         if($this->session->get('loggedin')){
             return $this->render('days/dayCreate.html.twig', [
@@ -45,7 +45,7 @@ class DayController extends AbstractController
             ]);
         }
         
-    }
+    }*/
 
     /**
      * @Route("/remove-day", name="removeDay")
@@ -81,4 +81,5 @@ class DayController extends AbstractController
             ]);
         }
     }
+    
 }

@@ -39,7 +39,7 @@ class LoginController extends AbstractController
     {
         $this->session = $session;
     }
-
+    //TODO : comments
     /**
     * @Route("/login", name="login")
     */
@@ -86,7 +86,6 @@ class LoginController extends AbstractController
             else{
                 array_push($errors, "Le mot de passe est incorrect");
             }
-            //TODO : Errors management
         }
             
         return $this->render('account/login.html.twig', [

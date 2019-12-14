@@ -18,8 +18,8 @@ class DayForm extends AbstractType
         $builder
             ->add('dayname', TextType::class)
             ->add('daydate', DateType::class)
-            ->add('submit', SubmitType::class, ['label' => 'Créer']);
+            ->add('dayBegintime', DateType::class)
+            ->add('dayEndtime', DateType::class)
+            ->add('submit', SubmitType::class, ['label' => 'Sauvegarder']);
     }
-
-    
 }

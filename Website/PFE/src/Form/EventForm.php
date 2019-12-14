@@ -23,7 +23,7 @@ class EventForm extends AbstractType
             ->add('evedescription', TextType::class)
             ->add('evebegintime', TimeType::class)
             ->add('eveendtime', TimeType::class)
-            ->add('submit', SubmitType::class, ['label' => 'Créer']);
+            ->add('submit', SubmitType::class, ['label' => 'Sauvegarder']);
     }
 
     
