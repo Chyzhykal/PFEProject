@@ -52,13 +52,14 @@ class LoginController extends AbstractController
         
         $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
-
+        if ($form->isSubmitted() && $form->isValid()) {
+            
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
-            $user = $form->getData();
-
+            $user = $form->getData(); 
             $pwd = $user->getUsepwd();
+
+            
             // $user->setUsepwd(password_hash($user->getUsepwd(),PASSWORD_BCRYPT));
             // $entityManager = $this->getDoctrine()->getManager();
             // $entityManager->persist($user);
@@ -67,20 +68,23 @@ class LoginController extends AbstractController
             $repository = $this->getDoctrine()->getRepository(TUser::class);
             // look for a single Product by name
             $foundUser = $repository->findOneBy(['uselogin' => $user->getUselogin()]);
-
+            
             if (!$foundUser) {
+                array_push($errors, "L'utilisateur inconnu.");
                 return $this->render('account/login.html.twig', [
                     'form' => $form->createView(),
+                    'errors'=>$errors,
                 ]);
             }
 
             if(password_verify( $pwd, $foundUser->getUsepwd())){
                 $this->session->set('username', $foundUser->getUselogin());
                 $this->session->set('loggedin', true);
+                $this->session->set('iduser', $foundUser->getIduser());
                 return $this->redirectToRoute('admin');     
             }
             else{
-                array_push($errors, "Le mot de passe est incorrect /n");
+                array_push($errors, "Le mot de passe est incorrect");
             }
             //TODO : Errors management
         }
@@ -89,5 +93,19 @@ class LoginController extends AbstractController
             'form' => $form->createView(),
             'errors'=>$errors,
         ]);
+    }
+
+     /**
+    * @Route("/deconnecter", name="logout")
+    */
+    public function Disconnect(Request $request)
+    {
+        if($this->session->has('loggedin')){
+            $this->session->remove('username');
+            $this->session->remove('loggedin');
+            $this->session->remove('iduser');
+        }
+            
+        return $this->redirectToRoute('index');   
     }
 }

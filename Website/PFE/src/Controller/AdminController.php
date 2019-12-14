@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\tempEntity\TempEvent;
+use App\Form\EventForm;
 
 class AdminController extends AbstractController
 {
@@ -26,7 +28,6 @@ class AdminController extends AbstractController
      */
     public function index()
     {
-
         if($this->session->get('loggedin')){
             return $this->render('account/eventAdmin.html.twig', [
                 'controller_name' => 'AdminController',
@@ -48,18 +49,7 @@ class AdminController extends AbstractController
         
     }
 
-     /**
-     * @Route("/new-event", name="newevent")
-     */
-    public function addEvent()
-    {
-        if($this->session->get('loggedin')){
-            return $this->render('account/eventAdmin.html.twig', [
-                'controller_name' => 'AdminController',
-            ]);
-        }
-        
-    }
+   
 
     /**
      * @Route("/show-day", name="showdays")
@@ -79,11 +69,12 @@ class AdminController extends AbstractController
      */
     public function showEvent()
     {
+
+
         if($this->session->get('loggedin')){
             return $this->render('account/eventAdmin.html.twig', [
                 'controller_name' => 'AdminController',
             ]);
         }
-        
     }
 }

@@ -1,6 +1,12 @@
 
-
-
+.formErrors{
+  padding-top:20px;
+}
+.formErrors, li {
+  color: rgba(255, 56, 56, 0.671);
+  text-decoration: none;
+  list-style-type: none;
+}
 
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/

@@ -7,11 +7,8 @@
                     <span class="visitLoginFormTitle p-b-43">
                         <h1>Se connecter :</h1>
                     </span>
-                    <div class="FormErrors">
-                        {{ form_errors(form) }}
-                    </div>
                     <div class="wrap-input100 textInputLogin rs1 validate-input" data-validate = "Username is required">
-                        {{ form_widget(form.uselogin, { 'attr': {'class': 'input1 inputLogin input100'} }) }}
+                        {{ form_widget(form.uselogin, { 'attr': {'class': 'input1 inputLogin input100'}, 'value': '' }) }}
                         <span class="label-inputLogin label-input100">Votre Login</span>
                     </div>               
                     <div class="wrap-input100 textInputLogin rs2 validate-input" data-validate="C'est un champ obligatoire">
@@ -22,6 +19,11 @@
                         {{ form_widget(form.submit, { 'attr': {'class': 'submit1 submitLoginBtn'} }) }}
                     </div>      
                 {{ form_end(form) }}
+            <ul class="formErrors">
+                {% for error in errors %}
+                    <li>{{ error}}</li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </div>

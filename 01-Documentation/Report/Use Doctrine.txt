@@ -1,0 +1,10 @@
+1) Configurer doctrine dans le fichier .env, pour cela il faut modifier le champ "DATABASE_URL"
+par "mysql://[username]:[password]@[server_ip]:[mysql_port]/[db_name]" (En remplaçant les informations entre crochets par ce que vous avez vous)
+    - Chez moi ça donne: mysql://root:root@127.0.0.1:3306/db_webdyn3
+
+2) Créer la base de donnée (et vérifier en même temps si tout fonctionne bien): php bin/console doctrine:database:create
+
+3) Récupérer les tables actuels de la base de donnée:
+    - Tester ce qu'on va récupérer php bin/console doctrine:schema:update --dump-sql (Cette commande va afficher les requêtes que doctrine va effectuer)
+    - Récupérer réellement les tables: php bin/console doctrine:schema:update --force (Cette commande va créer les tables dans la base de donnée)
+

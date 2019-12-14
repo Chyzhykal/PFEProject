@@ -22,28 +22,100 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/administration", name="admin")
+     * @Route("/agenda", name="agenda")
      */
     public function index()
     {
         if($this->session->get('loggedin')){
-            return $this->render('account/eventAdmin.html.twig', [
-                'controller_name' => 'AdminController',
+            return $this->render('days/agenda.html.twig', [
             ]);
         }
         
     }
+      /**
+     * @Route("/new-event", name="newevent")
+     */
+    public function addEvent(Request $request)
+    {
+        $event = new TempEvent();
+        
+        $form = $this->createForm(EventForm::class, $event);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $user = $form->getData(); 
+            $pwd = $user->getUsepwd();
+
+            
+            // $user->setUsepwd(password_hash($user->getUsepwd(),PASSWORD_BCRYPT));
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->persist($user);
+            // $entityManager->flush();
+            
+            $repository = $this->getDoctrine()->getRepository(TUser::class);
+            // look for a single Product by name
+            $foundUser = $repository->findOneBy(['uselogin' => $user->getUselogin()]);
+            
+            if (!$foundUser) {
+                array_push($errors, "L'utilisateur inconnu.");
+                return $this->render('account/login.html.twig', [
+                    'form' => $form->createView(),
+                    'errors'=>$errors,
+                ]);
+            }
+
+            if(password_verify( $pwd, $foundUser->getUsepwd())){
+                $this->session->set('username', $foundUser->getUselogin());
+                $this->session->set('loggedin', true);
+                $this->session->set('iduser', $foundUser->getIduser());
+                return $this->redirectToRoute('admin');     
+            }
+            else{
+                array_push($errors, "Le mot de passe est incorrect");
+            }
+        }
+            
+        return $this->render('events/eventCreate.html.twig', [
+            'form' => $form->createView(),
+            'errors'=>$errors,
+        ]);
+    }
 
     /**
-     * @Route("/event-details", name="eventdet")
+     * @Route("/remove-event", name="removeEvent")
      */
-    public function createDay()
+    public function removeEvent()
     {
         if($this->session->get('loggedin')){
-            return $this->render('account/eventAdmin.html.twig', [
-                'controller_name' => 'AdminController',
+            return $this->render('days/dayDetail.html.twig', [
             ]);
         }
-        
+    }
+
+     /**
+     * @Route("/event-detail", name="eventDetail")
+     */
+    public function showEvent()
+    {
+        if($this->session->get('loggedin')){
+            return $this->render('events/eventDetail.html.twig', [
+              
+            ]);
+        }
+    }
+
+      /**
+     * @Route("/event-modify", name="eventModify")
+     */
+    public function modifyEvent()
+    {
+        if($this->session->get('loggedin')){
+            return $this->render('events/modifyEvent.html.twig', [
+              
+            ]);
+        }
     }
 }

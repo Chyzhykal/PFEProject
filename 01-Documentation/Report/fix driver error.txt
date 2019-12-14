@@ -1,0 +1,10 @@
+-> Réinstaller complétement uWamp dans un nouveau dossier, donc il faut une installation propre (Je sais pas si c'est obligatoire, mais comme ça nos fichiers de config sont tout neuf)
+-> Avec uWamp, installer la version 7.2.7 de php (étapes se trouvent dans le readme de l'install)
+-> Réinstaller composer en lançant le .exe dans le dossier install
+-> Sélectionner la version de PHP 7.2.7 se trouvant dans la nouvelle installation uWamp
+-> Vérifier que composer ait coché "Create php.ini file"
+-> Terminer l'installation et ouvrir ce fichier php.ini
+-> rechercher "extension:pdo_mysql" et le décommenter
+-> relancer uWamp (le server Apache + SQL avec)
+-> Vérifier que tout s'est bien passé en faisant "php --ini" dans un cmd et regarder que "Loaded Configuration File" ne soit pas à "(none)"
+-> Vérifier aussi que "php -m" affiche "pdo_mysql" dans la liste

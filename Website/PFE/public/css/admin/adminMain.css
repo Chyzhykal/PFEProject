@@ -33,6 +33,7 @@
     text-align: left;
     width: 40%; 
     float: left;
+    cursor: pointer;
 }
 
 .adminButton1{
@@ -55,14 +56,6 @@
     padding: 10px 0 10px 10px;
     text-align: center;
     display: inline-block;
-}
-
-.wrap-adminButton1{
-
-}
-
-.wrap-adminButton2{
-
 }
 
 .wrap-adminButton1:hover, .wrap-adminButton2:hover{

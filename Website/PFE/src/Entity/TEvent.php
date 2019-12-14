@@ -53,14 +53,14 @@ class TEvent
     private $eveclass;
 
     /**
-     * @var string
+     * @var int
      *
      * @ORM\Column(name="eveTotPlaceNum", type="decimal", precision=10, scale=0, nullable=false)
      */
     private $evetotplacenum;
 
     /**
-     * @var string
+     * @var int
      *
      * @ORM\Column(name="evePlaceLeft", type="decimal", precision=10, scale=0, nullable=false)
      */
@@ -88,7 +88,7 @@ class TEvent
     private $eveendtime;
 
     /**
-     * @var int
+     * @var TDay
      *
      * @ORM\ManyToOne(targetEntity="TDay")
      * @ORM\JoinColumns({
@@ -98,7 +98,7 @@ class TEvent
     private $fkday;
 
     /**
-     * @var int
+     * @var TEvent
      *
      * @ORM\ManyToOne(targetEntity="TEvent")
      * @ORM\JoinColumns({
@@ -108,7 +108,7 @@ class TEvent
     private $fklinkedevent;
 
     /**
-     * @var int
+     * @var TUser
      *
      * @ORM\ManyToOne(targetEntity="TUser")
      * @ORM\JoinColumns({
@@ -193,24 +193,24 @@ class TEvent
         return $this;
     }
 
-    public function getEvetotplacenum(): ?string
+    public function getEvetotplacenum(): ?int
     {
         return $this->evetotplacenum;
     }
 
-    public function setEvetotplacenum(string $evetotplacenum): self
+    public function setEvetotplacenum(int $evetotplacenum): self
     {
         $this->evetotplacenum = $evetotplacenum;
 
         return $this;
     }
 
-    public function getEveplaceleft(): ?string
+    public function getEveplaceleft(): ?int
     {
         return $this->eveplaceleft;
     }
 
-    public function setEveplaceleft(string $eveplaceleft): self
+    public function setEveplaceleft(int $eveplaceleft): self
     {
         $this->eveplaceleft = $eveplaceleft;
 
@@ -229,31 +229,31 @@ class TEvent
         return $this;
     }
 
-    public function getEvebegintime(): ?\DateTimeInterface
+    public function getEvebegintime(): ?\DateTime
     {
         return $this->evebegintime;
     }
 
-    public function setEvebegintime(\DateTimeInterface $evebegintime): self
+    public function setEvebegintime(\DateTime $evebegintime): self
     {
         $this->evebegintime = $evebegintime;
 
         return $this;
     }
 
-    public function getEveendtime(): ?\DateTimeInterface
+    public function getEveendtime(): ?\DateTime
     {
         return $this->eveendtime;
     }
 
-    public function setEveendtime(\DateTimeInterface $eveendtime): self
+    public function setEveendtime(\DateTime $eveendtime): self
     {
         $this->eveendtime = $eveendtime;
 
         return $this;
     }
 
-    public function getFkday(): ?int
+    public function getFkday(): ?TDay
     {
         return $this->fkday;
     }
@@ -265,7 +265,7 @@ class TEvent
         return $this;
     }
 
-    public function getFklinkedevent(): ?int
+    public function getFklinkedevent(): ?TEvent
     {
         return $this->fklinkedevent;
     }
@@ -277,7 +277,7 @@ class TEvent
         return $this;
     }
 
-    public function getFkuser(): ?int
+    public function getFkuser(): ?TUser
     {
         return $this->fkuser;
     }
