@@ -2,7 +2,14 @@
 {% block body %}
 <div class="limiter">
     <div class="agenda-block">
-       
+        {% for day in days %}
+            <div class="day">
+                <p class="dayName">{{day.name}}</p>
+                <p class="dayDate">{{day.date}}</p>
+                <p class="dayBegin">{{day.beginTime}}</p>
+                <p class="dayEnd">{{day.endTime}}</p>
+            </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

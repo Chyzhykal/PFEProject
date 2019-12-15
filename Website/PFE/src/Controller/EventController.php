@@ -10,7 +10,9 @@ class EventController extends AbstractController
 {
 
     private $session;
-
+    //TODO : FINISH With twig events template
+    //TODO : RANDOM colors for event, but all dark for being able to see white text on it
+    //TODO : CONTROLLER event blocks, based on given example create kind of the same blocks
     /**
      * Constructor
      *

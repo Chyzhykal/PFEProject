@@ -1,17 +1,22 @@
 {% extends 'layoutAdmin.html.twig' %}
 {% block body %}
-<div class="limiter">
-    <div class="admin">
-        <div class="wrapAdminHome p-b-120 p-t-20">
-            <ul class="adminMenu">
-                <li class="adminButton1 ableft" ><a class="wrap-adminButton1" href={{ path('showdays')}}>Afficher les journées</a></li>
-                <li class="adminButton1 abright"><a class="wrap-adminButton1" href={{ path('showevents')}}>Afficher les événements</a></li>
-            </ul>
-            <ul class="adminMenu">
-                <li class="adminButton2 ableft"><a class="wrap-adminButton2" href={{ path('newday')}}>Ajouter une journée</a></li>
-                <li class="adminButton2 abright"><a class="wrap-adminButton2" href={{ path('newevent')}}>Ajouter un événement</a></li>
-            </ul>
+    <div class="limiter">
+    <div class="event-block">
+            {% for time in times %}
+                <div class="time-block"> 
+                    <div class="time-value"> 
+                        {{time.value}}
+                    </div>
+                    {% for event in events %}
+                        <div class="event">
+                            <p class="dayName">{{day.name}}</p>
+                            <p class="dayDate">{{day.date}}</p>
+                            <p class="dayBegin">{{day.beginTime}}</p>
+                            <p class="dayEnd">{{day.endTime}}</p>
+                        </div>
+                {% endfor %}
+                </div>
+            {% endfor %}
         </div>
     </div>
-</div>
 {% endblock %}
