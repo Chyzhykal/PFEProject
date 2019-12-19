@@ -1,7 +1,7 @@
-{% extends 'layoutAdmin.html.twig' %}
+{% extends 'layout/layoutDay.html.twig' %}
 {% block body %}
 <div class="limiter">
-    <div class="agenda-block">
+    <div class="wrapLimiter">
         {% for day in days %}
             <div class="day">
                 <p class="dayName">{{day.name}}</p>

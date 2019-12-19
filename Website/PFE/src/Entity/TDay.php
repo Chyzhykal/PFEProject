@@ -24,29 +24,31 @@ class TDay
 
     /**
      * @var string
-     *
+     * 
      * @ORM\Column(name="dayName", type="string", length=45, nullable=false)
      */
     private $dayname;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="dayDate", type="string", length=45, nullable=false)
+     * @var \DateTime
+     * 
+     * @ORM\Column(name="dayDate", type="date", length=45, nullable=false)
      */
     private $daydate;
 
     /**
-     * @var string
+     * 
+     * @var \DateTime
      *
-     * @ORM\Column(name="dayBeginTime", type="string", length=45, nullable=false)
+     * @ORM\Column(name="dayBeginTime", type="time", length=45, nullable=false)
      */
     private $daybegintime;
 
     /**
-     * @var string
+     * 
+     * @var \DateTime 
      *
-     * @ORM\Column(name="dayEndTime", type="string", length=45, nullable=false)
+     * @ORM\Column(name="dayEndTime", type="time", length=45, nullable=false)
      */
     private $dayendtime;
 
@@ -67,36 +69,36 @@ class TDay
         return $this;
     }
 
-    public function getDaydate(): ?string
+    public function getDaydate(): ?\DateTime
     {
         return $this->daydate;
     }
 
-    public function setDaydate(string $daydate): self
+    public function setDaydate(\DateTime $daydate): self
     {
         $this->daydate = $daydate;
 
         return $this;
     }
 
-    public function getDaybegintime(): ?string
+    public function getDaybegintime(): ?\DateTime
     {
         return $this->daybegintime;
     }
 
-    public function setDaybegintime(string $daybegintime): self
+    public function setDaybegintime(\DateTime $daybegintime): self
     {
         $this->daybegintime = $daybegintime;
 
         return $this;
     }
 
-    public function getDayendtime(): ?string
+    public function getDayendtime(): ?\DateTime
     {
         return $this->dayendtime;
     }
 
-    public function setDayendtime(string $dayendtime): self
+    public function setDayendtime(\DateTime $dayendtime): self
     {
         $this->dayendtime = $dayendtime;
 

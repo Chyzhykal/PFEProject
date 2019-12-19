@@ -1,0 +1,81 @@
+.wrapAdminAdd {
+    width: 560px;
+}
+
+.baseFormTitle{
+    color: #fefefe;
+    margin-bottom: 50px;
+}
+
+.baseText, .baseDate, .baseTime{
+    margin-top: 30px;
+    
+}
+.navitem2a{
+    
+}
+.baseText{
+    
+}
+
+.baseDate{
+
+}
+
+.baseDate select , .baseTime select, .baseDate option, .baseTime option {
+    background: #0702026e;
+    color: #fefefe;
+    border: 1px solid #fefefe;
+    width: 30%;
+    margin-right: 3px;
+    margin-left: 3px;
+    cursor: pointer;
+    padding: 10px 15px;
+    outline: 0;
+    border-radius: 1px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+ 
+}
+.baseDate select::-ms-expand , .baseTime select::-ms-expand{
+    display: none;
+}
+
+.baseTime{
+
+}
+
+.label-baseInput{
+    color: #fefefe;
+   
+} 
+
+.baseInput{
+    width: 100%;
+    margin-top: 5px;
+    background-color: transparent;
+    color: #fefefe;
+    display: block;
+}
+
+.textInput{
+    border: 1px solid #fefefe;  
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+.baseSubmit{
+    text-align: right;
+    margin-top: 40px;
+    margin-left: 3px;
+}
+
+.baseFormButton{
+    text-decoration: none;
+    padding: 20px;
+    border-radius: 3px;
+    background-color: rgba(114, 187, 83, 0.671);
+    border: 1px solid rgba(114, 187, 83, 0.096);
+    width: 50%;
+}

@@ -6,3 +6,33 @@ body{
     background: linear-gradient(left, #2F073B, #2575fc);
     min-height: 100%;
 }
+
+.limiter {
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+}
+
+.limiter {
+	height: 100%;
+	font-family: OpenSans-Regular, sans-serif;
+}
+
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.wrapLimiter{
+    width: 100%;  
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}

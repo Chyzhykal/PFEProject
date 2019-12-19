@@ -17,9 +17,9 @@ class DayForm extends AbstractType
     {
         $builder
             ->add('dayname', TextType::class)
-            ->add('daydate', DateType::class)
-            ->add('dayBegintime', DateType::class)
-            ->add('dayEndtime', DateType::class)
+            ->add('daydate', DateType::class, ['invalid_message' => 'La date n\'est pas valide'])
+            ->add('dayBegintime', TimeType::class, ['invalid_message' => 'L\'heure n\'est pas valide'])
+            ->add('dayEndtime', TimeType::class, ['invalid_message' => 'L\'heure n\'est pas valide'])
             ->add('submit', SubmitType::class, ['label' => 'Sauvegarder']);
     }
 }

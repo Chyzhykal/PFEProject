@@ -1,13 +1,13 @@
-{% extends 'layout.html.twig' %}
+{% extends 'layout/layout.html.twig' %}
 {% block body %}
 <div class="limiter">
-    <div class="visitLogin">
+    <div class="wrapLimiter">
         <div class="wrapVisitLogin p-b-160 p-t-50">
                 {{ form_start(form, {'method': 'POST' , 'attr':{'class': 'visitLoginForm login100-form validate-form'}}) }}
                     <span class="visitLoginFormTitle p-b-43">
                         <h1>Se connecter :</h1>
                     </span>
-                    <div class="wrap-input100 textInputLogin rs1 validate-input" data-validate = "Username is required">
+                    <div class="wrap-input100 textInputLogin rs1 validate-input" data-validate = "C'est un champ obligatoire">
                         {{ form_widget(form.uselogin, { 'attr': {'class': 'input1 inputLogin input100'}, 'value': '' }) }}
                         <span class="label-inputLogin label-input100">Votre Login</span>
                     </div>               

@@ -24,22 +24,6 @@
 
 
 
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
-
-.limiter {
-	margin: 0px; 
-	padding: 0px; 
-	box-sizing: border-box;
-}
-
-.limiter {
-	height: 100%;
-	font-family: OpenSans-Regular, sans-serif;
-}
-
-
-
 /*---------------------------------------------*/
 .input1 {
 	outline: none;
@@ -112,10 +96,7 @@ iframe {
 
 /*//////////////////////////////////////////////////////////////////
 [ login ]*/
-.limiter {
-  width: 100%;
-  margin: 0 auto;
-}
+
 
 .visitLogin {
   width: 100%;  

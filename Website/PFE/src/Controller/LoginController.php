@@ -59,11 +59,12 @@ class LoginController extends AbstractController
             $user = $form->getData(); 
             $pwd = $user->getUsepwd();
 
+            //TODO: ADD multiple users with random generated passwords for production
             
-            // $user->setUsepwd(password_hash($user->getUsepwd(),PASSWORD_BCRYPT));
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($user);
-            // $entityManager->flush();
+            //$user->setUsepwd(password_hash($user->getUsepwd(),PASSWORD_BCRYPT));
+           // $entityManager = $this->getDoctrine()->getManager();
+           // $entityManager->persist($user);
+           // $entityManager->flush();
             
             $repository = $this->getDoctrine()->getRepository(TUser::class);
             // look for a single Product by name

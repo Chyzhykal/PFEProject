@@ -55,14 +55,14 @@ class TEvent
     /**
      * @var int
      *
-     * @ORM\Column(name="eveTotPlaceNum", type="decimal", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="eveTotPlaceNum", type="integer", precision=10, scale=0, nullable=false)
      */
     private $evetotplacenum;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="evePlaceLeft", type="decimal", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="evePlaceLeft", type="integer", precision=10, scale=0, nullable=false)
      */
     private $eveplaceleft;
 

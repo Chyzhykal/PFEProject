@@ -1,0 +1,69 @@
+{#
+   This is the base template of the all backend pages. Since this layout is similar
+   to the global layout, we inherit from it to just change the contents of some
+   blocks. In practice, backend templates are using a three-level inheritance,
+   showing how powerful, yet easy to use, is Twig's inheritance mechanism.
+   See https://symfony.com/doc/current/book/templating.html#template-inheritance-and-layouts
+#}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href={{asset('css/bootstrap/bootstrap.min.css')}}>
+
+    <link rel="stylesheet" href={{asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}>
+    <link rel="stylesheet" href={{asset('fonts/Linearicons-Free-v1.0.0/icon-font.min.css')}}>
+    <link rel="stylesheet" href={{asset('vindor/animate/animate.css')}}>
+    <link rel="stylesheet" href={{asset('vindor/css-hamburgers/hamburgers.min.css')}}>
+    <link rel="stylesheet" href={{asset('vindor/animsition/css/animsition.min.css')}}>
+    <link rel="stylesheet" href={{asset('vindor/select2/select2.min.css')}}>
+    <link rel="stylesheet" href={{asset('vindor/daterangepicker/daterangepicker.css')}}>
+
+    <link rel="stylesheet" type="text/css" href={{asset('css/util.css')}}>
+    <link rel="stylesheet" type="text/css" href={{asset('css/main.css')}}>
+    <link rel="stylesheet" type="text/css" href={{asset('css/nav.css')}}>
+    <link rel="stylesheet" type="text/css" href={{asset('css/footer.css')}}>
+    <link rel="stylesheet" type="text/css" href={{asset('css/event/add-forms.css')}}>
+    <link rel="stylesheet" type="text/css" href={{asset('css/admin/adminMain.css')}}>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src={{asset('js/jquery-3.4.1.js')}}></script>
+
+    <script src={{asset('vindor/animsition/js/animsition.min.js')}}></script>
+    <script src={{asset('vindor/bootstrap/js/popper.js')}}></script>
+    <script src={{asset('js/bootstrap.min.js')}}></script>
+
+    <script src={{asset('vindor/daterangepicker/moment.min.js')}}></script>
+    <script src={{asset('vindor/daterangepicker/daterangepicker.js')}}></script>
+    <script src={{asset('vindor/select2/select2.min.js')}}></script>
+
+    <script src={{asset('vindor/countdowntime/countdowntime.js')}}></script>
+    <script src={{asset('js/adminIndex.js')}}></script>
+   
+	<script src={{asset('js/main.js')}}></script>
+{% endblock %}
+
+{% block nav %}
+    {{ parent() }}
+    <nav class="navig">
+            <ul class="navcore">
+                <li class="navTitleLi" ><a class="navtitle" href={{ path('admin')}}>JOURNEE PEDAGOGIQUE</a></li>
+                <li class="navLink"><a class="navitema" href={{ path('admin')}}>Gestion des jours</a></li>
+                <li class="navLink"><a class="navitema" href={{ path('agenda')}}>Agenda</a></li>
+                <li class="navButton"><a class="navitem2a" href={{ path('logout')}}>Se deconnecter</a></li>
+            </ul>
+    </nav>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+    <footer class="foot">
+        <p class="footText footText1">Créé par Chyzhyk Aleh pour le projet "Journée pédagogique"</p>
+        <p class="footText">05.12.2019</p>
+        <p class="footText">ETML</p>
+    </nav>
+{% endblock %}

@@ -24,7 +24,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/agenda", name="agenda")
+     * @Route("/agenda", name="2")
      */
     public function index()
     {
