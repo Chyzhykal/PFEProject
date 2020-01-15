@@ -5,13 +5,16 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Entity\TEvent;
+use Symfony\Component\HttpFoundation\Request;
+use App\tempEntity\TempEvent;
+use App\Entity\TEventPriority;
 
 class EventController extends AbstractController
 {
-
     private $session;
     //TODO : FINISH With twig events template
-    //TODO : RANDOM colors for event, but all dark for being able to see white text on it
+    //TODO : RANDOM colors for event, but all dark for being able to see white text on it - if have time
     //TODO : CONTROLLER event blocks, based on given example create kind of the same blocks
     /**
      * Constructor
@@ -24,33 +27,43 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/agenda", name="2")
+     * @Route("/activity-detail/{idActivity}", methods={"GET"}, name="activityDetail")
+     * @param int $idActivity
      */
-    public function index()
+    public function index(int $idActivity)
     {
-        if($this->session->get('loggedin')){
-            return $this->render('events/theming.html.twig', [
-            ]);
+        if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
+            return $this->redirectToRoute('index');     
         }
-        
+        return $this->render('events/theming.html.twig', [
+        ]);
     }
-      /**
-     * @Route("/new-event", name="newevent")
-     */
-  /*  public function addEvent(Request $request)
+
+    /**
+    * @Route("/new-event", name="newevent")
+    */
+    public function addEvent(Request $request)
     {
-        $event = new TempEvent();
+        if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
+            return $this->redirectToRoute('index');     
+        }   
+
+        $repository = $this->getDoctrine()->getRepository(TEventPriority::class);
+        $priorities = $repository->findAll();
         
-        $form = $this->createForm(EventForm::class, $event);
+        $activity = new TempEvent();
+        $form = $this->createForm(EventForm::class, $activity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
-            $event = $form->getData(); 
+            $activity = $form->getData(); 
+
+            $activity->setFkday($this->session->get('idDay'));
+
 
             
+
             // $user->setUsepwd(password_hash($user->getUsepwd(),PASSWORD_BCRYPT));
             // $entityManager = $this->getDoctrine()->getManager();
             // $entityManager->persist($user);
@@ -83,29 +96,18 @@ class EventController extends AbstractController
             'form' => $form->createView(),
             'errors'=>$errors,
         ]);
-    }*/
+    }
 
     /**
      * @Route("/remove-event", name="removeEvent")
      */
     public function removeEvent()
     {
-        if($this->session->get('loggedin')){
-            return $this->render('days/dayDetail.html.twig', [
-            ]);
+        if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
+            return $this->redirectToRoute('index');     
         }
-    }
-
-     /**
-     * @Route("/event-detail", name="eventDetail")
-     */
-    public function showEvent()
-    {
-        if($this->session->get('loggedin')){
-            return $this->render('events/eventDetail.html.twig', [
-              
-            ]);
-        }
+        return $this->render('days/dayDetail.html.twig', [
+        ]);
     }
 
       /**
@@ -113,10 +115,11 @@ class EventController extends AbstractController
      */
     public function modifyEvent()
     {
-        if($this->session->get('loggedin')){
-            return $this->render('events/modifyEvent.html.twig', [
-              
-            ]);
+        if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
+            return $this->redirectToRoute('index');     
         }
+        return $this->render('events/modifyEvent.html.twig', [
+            
+        ]);
     }
 }

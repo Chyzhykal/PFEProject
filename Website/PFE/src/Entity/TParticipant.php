@@ -17,7 +17,7 @@ class TParticipant
 {
     /**
      * @var int
-     *
+     * @Assert\NotBlank
      * @ORM\Column(name="idParticipant", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")

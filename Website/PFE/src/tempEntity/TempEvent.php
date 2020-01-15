@@ -20,13 +20,13 @@ class TempEvent
      * @var string
      *
      */
-    private $name;
+    private $priority;
 
     /**
      * @var string
      *
      */
-    private $type;
+    private $name;
 
     /**
      * @var string
@@ -44,7 +44,7 @@ class TempEvent
      * @var int
      *
      */
-    private $totPlace;
+    private $totalPlaces;
 
     /**
      * @var string
@@ -56,31 +56,13 @@ class TempEvent
      * @var \DateTime
      *
      */
-    private $startTime;
+    private $beginTime;
 
     /**
      * @var \DateTime
      *
      */
     private $endTime;
-
-    /**
-     * @var TDay
-     *
-     */
-    private $fkday;
-
-    /**
-     * @var TEvent
-     *
-     */
-    private $fklinkedevent;
-
-    /**
-     * @var TUser
-     *
-     */
-    private $creator;
 
     public function getName(): ?string
     {
@@ -94,14 +76,14 @@ class TempEvent
         return $this;
     }
 
-    public function getType(): ?string
+    public function getPriority(): ?string
     {
-        return $this->type;
+        return $this->priority;
     }
 
-    public function setType(string $type): self
+    public function setPriority(string $priority): self
     {
-        $this->type = $type;
+        $this->priority = $priority;
 
         return $this;
     }
@@ -130,14 +112,14 @@ class TempEvent
         return $this;
     }
 
-    public function getTotPlace(): ?int
+    public function getTotalPlaces(): ?int
     {
-        return $this->totPlace;
+        return $this->totalPlaces;
     }
 
-    public function setTotPlace(int $totPlace): self
+    public function setTotalPlaces(int $totalPlaces): self
     {
-        $this->totPlace = $totPlace;
+        $this->totalPlaces = $totalPlaces;
 
         return $this;
     }
@@ -154,24 +136,24 @@ class TempEvent
         return $this;
     }
 
-    public function getEvebegintime(): ?\DateTime
+    public function getStartTime(): ?\DateTime
     {
-        return $this->startTime;
+        return $this->beginTime;
     }
 
-    public function setEvebegintime(\DateTime $startTime): self
+    public function setStartTime(\DateTime $beginTime): self
     {
-        $this->startTime = $startTime;
+        $this->beginTime = $beginTime;
 
         return $this;
     }
 
-    public function getEveendtime(): ?\DateTime
+    public function getEndTime(): ?\DateTime
     {
         return $this->endTime;
     }
 
-    public function setEveendtime(\DateTime $endTime): self
+    public function setEndTime(\DateTime $endTime): self
     {
         $this->endTime = $endTime;
 

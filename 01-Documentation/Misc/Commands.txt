@@ -1,0 +1,2 @@
+php bin\console make:entity --regenerate 
+Generates repository by given entity

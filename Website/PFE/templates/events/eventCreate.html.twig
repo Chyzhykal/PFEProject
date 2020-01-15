@@ -1,16 +1,68 @@
-{% extends 'layout/layoutAdmin.html.twig' %}
+{% extends 'layout/layoutDay.html.twig' %}
 {% block body %}
 <div class="limiter">
     <div class="wrapLimiter">
-        <div class="wrapAdminHome p-b-120 p-t-20">
-            <ul class="adminMenu">
-                <li class="adminButton1 ableft" ><a class="wrap-adminButton1" href={{ path('showdays')}}>Afficher les journées</a></li>
-                <li class="adminButton1 abright"><a class="wrap-adminButton1" href={{ path('showevents')}}>Afficher les événements</a></li>
-            </ul>
-            <ul class="adminMenu">
-                <li class="adminButton2 ableft"><a class="wrap-adminButton2" href={{ path('newday')}}>Ajouter une journée</a></li>
-                <li class="adminButton2 abright"><a class="wrap-adminButton2" href={{ path('newevent')}}>Ajouter un événement</a></li>
-            </ul>
+        <div class="wrapAdminAdd p-b-120 p-t-20">
+            {{ form_start(form, {'method': 'POST' , 'attr':{'class': 'baseForm validate-form'}}) }}
+                <span class="baseFormTitle ">
+                    <h1>Ajouter une journée :</h1>
+                </span>
+               
+                <div class="baseText validate-input" data-validate = "C'est un champ obligatoire">
+                    <span class="label-baseInput label-input100">Le nom de la journée (45 caractères max)</span>
+                    {{ form_widget(form.dayname, { 'attr': {'class': 'baseInput textInput '}, 'value': '' }) }}
+                </div>
+                <div class="formErrors">
+                    {{ form_errors(form.dayname) }}
+                </div>    
+
+                  <div class="baseText validate-input" data-validate = "C'est un champ obligatoire">
+                    <span class="label-baseInput label-input100">Description (optionnel, 255 caractères max)</span>
+                    {{ form_widget(form.daydescription, { 'attr': {'class': 'baseInput textInput '}, 'value': '' }) }}
+                </div>
+                <div class="formErrors">
+                    {{ form_errors(form.daydescription) }}
+                </div>    
+                        
+                <div class="baseDate validate-input" data-validate="C'est un champ obligatoire">
+                    <span class="label-baseInput label-input100">La date de la journée</span>
+                    {{ form_widget(form.daydate, { 'attr': {'class': 'baseInput'} }) }}
+                </div>
+                <div class="formErrors">
+                    {{ form_errors(form.daydate) }}
+                </div>  
+
+                <div class="baseTime validate-input" data-validate="C'est un champ obligatoire">
+                    <span class="label-baseInput label-input100">L'heure de début</span>
+                    {{ form_widget(form.dayBegintime, { 'attr': {'class': 'baseInput'} }) }}
+                </div>
+                <div class="formErrors">
+                    {{ form_errors(form.dayBegintime) }}
+                </div>  
+                <div class="baseTime validate-input" data-validate="C'est un champ obligatoire">
+                    <span class="label-baseInput label-input100">L'heure de fin</span>
+                    {{ form_widget(form.dayEndtime, { 'attr': {'class': 'baseInput'} }) }}
+                </div>
+                <div class="formErrors">
+                    {{ form_errors(form.dayEndtime) }}
+                </div>  
+                <div class="checkBxContainer validate-input" data-validate="C'est un champ obligatoire">
+                    <span class="label-baseInput label-input100">Répéter chaque année</span>
+                    {{ form_widget(form.dayrepeat, { 'attr': {'class': 'baseInput checkBx'} }) }}
+                </div>
+                <div class="formErrors">
+                    {{ form_errors(form.dayrepeat) }}
+                </div>  
+                <div class="baseSubmit">
+                    {{ form_widget(form.submit, { 'attr': {'class': 'baseFormButton'} }) }}
+                </div>
+                  
+            {{ form_end(form) }}
+        <ul class="formErrors">
+            {% for error in errors %}
+                <li>{{ error}}</li>
+            {% endfor %}
+        </ul>
         </div>
     </div>
 </div>

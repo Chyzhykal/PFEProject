@@ -29,6 +29,12 @@ class TUser
      * @ORM\Column(name="useLogin", type="string", length=100, nullable=false)
      * @Assert\NotBlank
      * @Assert\Type("string")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Votre login doit avoir au minimum 2 caractères",
+     *      maxMessage = "Votre login peut avoir au maximum 100 caractères"
+     * )
      */
     private $uselogin;
 

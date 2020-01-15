@@ -10,7 +10,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * TEvent
  *
- * @ORM\Table(name="t_event", uniqueConstraints={@ORM\UniqueConstraint(name="idEvent_UNIQUE", columns={"idEvent"})}, indexes={@ORM\Index(name="fk_t_event_t_user1_idx", columns={"fkUser"}), @ORM\Index(name="fk_t_event_t_event1", columns={"fkLinkedEvent"}), @ORM\Index(name="fk_t_event_t_day1_idx", columns={"fkDay"})})
+ * @ORM\Table(name="t_event", uniqueConstraints={@ORM\UniqueConstraint(name="idEvent_UNIQUE", columns={"idEvent"})}, indexes={
+ * @ORM\Index(name="fk_t_event_t_user1_idx", columns={"fkUser"}), 
+ * @ORM\Index(name="fk_t_event_t_event1", columns={"fkLinkedEvent"}), 
+ * @ORM\Index(name="fk_t_event_t_day1_idx", columns={"fkDay"}), 
+ * @ORM\Index(name="fk_t_event_t_priority_idx", columns={"fkPriority"})
+ * })
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  */
 class TEvent
@@ -28,15 +33,16 @@ class TEvent
      * @var string
      *
      * @ORM\Column(name="eveName", type="string", length=255, nullable=false)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Le nom de l'événement doit avoir au minimum 2 caractères",
+     *      maxMessage = "Le nom de l'événement peut avoir au maximum 255 caractères"
+     * )
      */
     private $evename;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="eveType", type="string", length=255, nullable=false)
-     */
-    private $evetype;
+    
 
     /**
      * @var string
@@ -74,6 +80,7 @@ class TEvent
     private $evedescription;
 
     /**
+     * @Assert\NotBlank
      * @var \DateTime
      *
      * @ORM\Column(name="eveBeginTime", type="time", nullable=false)
@@ -81,6 +88,7 @@ class TEvent
     private $evebegintime;
 
     /**
+     * @Assert\NotBlank
      * @var \DateTime
      *
      * @ORM\Column(name="eveEndTime", type="time", nullable=false)
@@ -88,6 +96,7 @@ class TEvent
     private $eveendtime;
 
     /**
+      * @Assert\NotBlank
      * @var TDay
      *
      * @ORM\ManyToOne(targetEntity="TDay")
@@ -132,6 +141,17 @@ class TEvent
      */
     private $fkparticipant;
 
+
+     /**
+     * @var TEventPriority
+     *
+     * @ORM\ManyToOne(targetEntity="TEventPriority")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fkPriority", referencedColumnName="idPriority")
+     * })
+     */
+    private $fkpriority;
+
     /**
      * Constructor
      */
@@ -157,14 +177,14 @@ class TEvent
         return $this;
     }
 
-    public function getEvetype(): ?string
+    public function getFkpriority(): ?TEventPriority
     {
-        return $this->evetype;
+        return $this->fkpriority;
     }
 
-    public function setEvetype(string $evetype): self
+    public function setFkpriority(TEventPriority $fkpriority): self
     {
-        $this->evetype = $evetype;
+        $this->fkpriority = $fkpriority;
 
         return $this;
     }

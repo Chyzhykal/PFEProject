@@ -26,10 +26,35 @@ class TDay
      * @var string
      * 
      * @ORM\Column(name="dayName", type="string", length=45, nullable=false)
+     * @Assert\NotBlank
+     * @Assert\Type("string")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 45,
+     *      minMessage = "Le nom de la journée doit avoir au minimum 2 caractères",
+     *      maxMessage = "Le nom de la journée peut avoir au maximum 45 caractères"
+     * )
      */
     private $dayname;
 
     /**
+     * @var string
+     * 
+     * @ORM\Column(name="dayDescription", type="string", length=255, nullable=true)
+     * @Assert\NotBlank
+     * @Assert\Type(
+     *     type="string",
+     *     message="Le champ est de type texte"
+     * )
+     *  @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "La description peut avoir au maximum 255 caractères"
+     * )
+     */
+    private $daydescription;
+
+    /**
+     * @Assert\NotBlank
      * @var \DateTime
      * 
      * @ORM\Column(name="dayDate", type="date", length=45, nullable=false)
@@ -37,7 +62,7 @@ class TDay
     private $daydate;
 
     /**
-     * 
+     * @Assert\NotBlank
      * @var \DateTime
      *
      * @ORM\Column(name="dayBeginTime", type="time", length=45, nullable=false)
@@ -45,12 +70,33 @@ class TDay
     private $daybegintime;
 
     /**
-     * 
+     * @Assert\NotBlank
      * @var \DateTime 
      *
      * @ORM\Column(name="dayEndTime", type="time", length=45, nullable=false)
      */
     private $dayendtime;
+
+    /**
+     * @Assert\NotBlank
+     * @var bool
+     * 
+     * @ORM\Column(name="dayRepeat", type="boolean", nullable=false)
+     */
+    private $dayrepeat=true;
+
+    public function getDayrepeat(): ?bool
+    {
+        return $this->dayrepeat;
+    }
+
+    public function setDayrepeat(bool $dayrepeat): self
+    {
+        $this->dayrepeat = $dayrepeat;
+
+        return $this;
+    }
+
 
     public function getIdday(): ?int
     {
@@ -105,5 +151,16 @@ class TDay
         return $this;
     }
 
+    public function getDaydescription(): ?string
+    {
+        return $this->daydescription;
+    }
+
+    public function setDaydescription(string $daydescription): self
+    {
+        $this->daydescription = $daydescription;
+
+        return $this;
+    }
 
 }

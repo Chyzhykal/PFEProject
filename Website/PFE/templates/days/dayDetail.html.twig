@@ -2,6 +2,20 @@
 {% block body %}
     <div class="limiter">
     <div class="wrapLimiter">
+             <div class="day">
+                <p class="dayName">Nom du jour : {{day.name}}</p>
+                <p class="dayDescription">{{day.description}}</p>
+                <p class="dayDate">Date : {{day.date}}</p>
+                <p class="dayBegin">L'heure de début : {{day.beginTime}}</p>
+                <p class="dayEnd">L'heure de fin : {{day.endTime}}</p>
+                {% if day.repeat == true %}
+                    <p class="dayRepeat">L'événement se répète chaque année</p>
+                {% else %}
+                    <p class="dayRepeat">L'événement est unique</p>
+                {% endif %}
+                <a class="dayDetailBtn" href={{ path('removeDay', { idDay: day.idDay })}}>Supprimer</a>
+                <a class="dayDetailBtn" href={{ path('dayModify', { idDay: day.idDay })}}>Modifier</a>
+            </div>
             {% for time in times %}
                 <div class="time-block"> 
                     <div class="time-value"> 
@@ -9,10 +23,12 @@
                     </div>
                     {% for event in events %}
                         <div class="event">
-                            <p class="dayName">{{day.name}}</p>
-                            <p class="dayDate">{{day.date}}</p>
-                            <p class="dayBegin">{{day.beginTime}}</p>
+                            <p class="eveName">{{day.name}}</p>
+                            <p class="eveType">{{day.date}}</p>
+                            <p class="eveAuthor">{{day.beginTime}}</p>
                             <p class="dayEnd">{{day.endTime}}</p>
+                            <a class="dayDetailBtn" href="">Supprimer</a>
+                            <a class="dayDetailBtn" href="">Modifier</a>
                         </div>
                 {% endfor %}
                 </div>

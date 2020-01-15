@@ -1,8 +1,10 @@
 .foot{
+    float: none;
     background: rgba(0, 0, 0, 0.692);
-    position: relative;
-    display: block;
     bottom: 0px;
+    width: 100%;
+    clear: both;
+    position: relative;
 }
 
 .footText{

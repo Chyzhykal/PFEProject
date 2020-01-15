@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Entity\TDay;
 use App\Form\DayForm;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\TEvent;
 
 class DayController extends AbstractController
 {
@@ -35,18 +36,18 @@ class DayController extends AbstractController
         $days=array();
         foreach($foundDays as $day){
             $name=$day->getDayname();
-            $date=$day->getDaydate()->format('Y-m-d H:i:s');
-            $beginTime=$day->getDaybegintime()->format('Y-m-d H:i:s');
-            $endTime=$day->getDayendtime()->format('Y-m-d H:i:s');
-            array_push($days, array('name'=>$name, 'date'=>$date, 'beginTime'=>$beginTime, 'endTime'=>$endTime));
+            $date=$day->getDaydate()->format('Y/m/d');
+            $beginTime=$day->getDaybegintime()->format('H\hi');
+            $endTime=$day->getDayendtime()->format('H\hi');
+            $description=$day->getDaydescription();
+            $repeat=$day->getDayrepeat();
+            $idDay=$day->getIdday();
+            array_push($days, array('idDay'=>$idDay, 'description'=>$description, 'repeat'=>$repeat, 'name'=>$name, 'date'=>$date, 'beginTime'=>$beginTime, 'endTime'=>$endTime));
         }
-        if($this->session->get('loggedin')){
             return $this->render('days/agenda.html.twig', [
                 'days'=> $days,
                 'errors'=>array()
-            ]);
-        }
-        
+            ]); 
     }
 
     /**
@@ -54,11 +55,11 @@ class DayController extends AbstractController
      */
     public function addDay(Request $request)
     {
-        if($this->session->get('loggedin')){
+        if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
+            return $this->redirectToRoute('index');     
+        }
             $day = new TDay();
-        
             $form = $this->createForm(DayForm::class, $day);
-            
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -104,43 +105,64 @@ class DayController extends AbstractController
                 'form' => $form->createView(),
                 'errors'=>array(),
             ]);
+    }
+
+
+    /**
+     * @Route("/remove-day/{idDay}", methods={"GET"}, name="removeDay")
+     * @param int $idDay
+     */
+    public function removeDay(int $idDay)
+    {
+        if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
+            return $this->redirectToRoute('index');     
         }
-        
+
+
+        return $this->redirectToRoute('agenda');
     }
 
     /**
-     * @Route("/remove-day", name="removeDay")
+     * @Route("/day-detail/{idDay}", methods={"GET"}, name="dayDetail")
+     * @param int $idDay
      */
-    public function removeDay()
+    public function showDay(int $idDay)
     {
-        if($this->session->get('loggedin')){
-            return $this->render('days/agenda.html.twig', [
-            ]);
+        if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
+            return $this->redirectToRoute('index');     
         }
+        $repository = $this->getDoctrine()->getRepository(TDay::class);
+        $day = $repository->findOneBy(['idday'=>$idDay]);
+        $name=$day->getDayname();
+        $date=$day->getDaydate()->format('Y/m/d');
+        $beginTime=$day->getDaybegintime()->format('H\hi');
+        $endTime=$day->getDayendtime()->format('H\hi');
+        $description=$day->getDaydescription();
+        $repeat=$day->getDayrepeat();
+        $idDay=$day->getIdday();
+        $foundDay=array('idDay'=>$idDay, 'description'=>$description, 'repeat'=>$repeat, 'name'=>$name, 'date'=>$date, 'beginTime'=>$beginTime, 'endTime'=>$endTime);
+
+        $repository = $this->getDoctrine()->getRepository(TEvent::class);
+        $events = $repository->findBy(['fkday'=>$idDay]);
+
+        $this->session->set('idDay', $idDay);
+        return $this->render('days/dayDetail.html.twig', [
+            'day'=>$foundDay,
+        ]);
     }
 
     /**
-     * @Route("/day-detail", name="dayDetail")
+     * @Route("/day-modify/{idDay}", methods={"GET"}, name="dayModify")
+     * @param int $idDay
      */
-    public function showDay()
+    public function modifyDay(int $idDay)
     {
-        if($this->session->get('loggedin')){
-            return $this->render('days/dayDetail.html.twig', [
-                
-            ]);
+        if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
+            return $this->redirectToRoute('index');     
         }
-    }
-
-    /**
-     * @Route("/day-modify", name="dayModify")
-     */
-    public function modifyDay()
-    {
-        if($this->session->get('loggedin')){
-            return $this->render('days/modifyDay.html.twig', [
-              
-            ]);
-        }
+        return $this->render('days/modifyDay.html.twig', [
+            
+        ]);
     }
     
 }

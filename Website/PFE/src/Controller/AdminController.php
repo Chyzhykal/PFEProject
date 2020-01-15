@@ -28,12 +28,12 @@ class AdminController extends AbstractController
      */
     public function index()
     {
-        if($this->session->get('loggedin')){
-            return $this->render('account/mainPage.html.twig', [
-                'controller_name' => 'AdminController',
-            ]);
+        if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
+            return $this->redirectToRoute('index');     
         }
-        
+        return $this->render('account/mainPage.html.twig', [
+            'controller_name' => 'AdminController',
+        ]);
     }
 
     /**
@@ -41,12 +41,12 @@ class AdminController extends AbstractController
      */
     public function createDay()
     {
-        if($this->session->get('loggedin')){
-            return $this->render('account/mainPage.html.twig', [
-                'controller_name' => 'AdminController',
-            ]);
+        if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
+            return $this->redirectToRoute('index');     
         }
-        
+        return $this->render('account/mainPage.html.twig', [
+            'controller_name' => 'AdminController',
+        ]);
     }
 
    
@@ -56,12 +56,12 @@ class AdminController extends AbstractController
      */
     public function showDay()
     {
-        if($this->session->get('loggedin')){
-            return $this->render('account/mainPage.html.twig', [
-                'controller_name' => 'AdminController',
-            ]);
+        if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
+            return $this->redirectToRoute('index');     
         }
-        
+        return $this->render('account/mainPage.html.twig', [
+            'controller_name' => 'AdminController',
+        ]);
     }
 
     /**
@@ -69,10 +69,11 @@ class AdminController extends AbstractController
      */
     public function showEvent()
     {
-        if($this->session->get('loggedin')){
-            return $this->render('account/eventAdmin.html.twig', [
-                'controller_name' => 'AdminController',
-            ]);
+        if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
+            return $this->redirectToRoute('index');     
         }
+        return $this->render('account/eventAdmin.html.twig', [
+            'controller_name' => 'AdminController',
+        ]);
     }
 }
