@@ -9,6 +9,7 @@ use App\Entity\TDay;
 use App\Form\DayForm;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\TEvent;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class DayController extends AbstractController
 {
@@ -31,12 +32,29 @@ class DayController extends AbstractController
     public function index()
     {
         $repository = $this->getDoctrine()->getRepository(TDay::class);
-        $foundDays = $repository->findBy(array(), array('daydate' => 'ASC', 'daybegintime'=>'ASC'));
+        $foundDays = $repository->findBy(array('daydeleted'=>false), array('daydate' => 'ASC', 'daybegintime'=>'ASC'));
+        $date = new DateTime();
+        for($i=0;$i<count($foundDays); $i++){
+            if($foundDays[$i]->getDaydate()>$date && $foundDays[$i]->getDayrepeat()==true){
+                $foundDays[$i]->setDaydate($date);
+                $entityManager = $this->getDoctrine()->getManager();
+                $foundDay = $entityManager->getRepository(TDay::class)->find($foundDays[$i]->getIdday());
+                $foundDay->setDaydate($date);
+                $entityManager->flush();
+            }
+            elseif($foundDays[$i]->getDaydate()>$date && $foundDays[$i]->getDayrepeat()==false){
+                $foundDays[$i]->setDaydeleted(true);
+                $entityManager = $this->getDoctrine()->getManager();
+                $foundDay = $entityManager->getRepository(TDay::class)->find($foundDays[$i]->getIdday());
+                $foundDay->setDaydeleted(true);
+                $entityManager->flush();
+            }
+        }
 
         $days=array();
         foreach($foundDays as $day){
             $name=$day->getDayname();
-            $date=$day->getDaydate()->format('Y/m/d');
+            $date=$day->getDaydate()->format('d/m/Y');
             $beginTime=$day->getDaybegintime()->format('H\hi');
             $endTime=$day->getDayendtime()->format('H\hi');
             $description=$day->getDaydescription();
@@ -58,16 +76,14 @@ class DayController extends AbstractController
         if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
             return $this->redirectToRoute('index');     
         }
+            $errors=array();
             $day = new TDay();
             $form = $this->createForm(DayForm::class, $day);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                
-                // $form->getData() holds the submitted values
-                // but, the original `$task` variable has also been updated
                 $inputDay = $form->getData(); 
-    
+                
                 if($inputDay->getDayname()==null || $inputDay->getDayDate()==null || $inputDay->getDaybegintime()==null || $inputDay->getDayendTime()==null){
                     $errors=array();
 
@@ -80,7 +96,7 @@ class DayController extends AbstractController
                 }
                
                 $repository = $this->getDoctrine()->getRepository(TDay::class);
-                // look for a single Product by name
+                // look for a single day by name
                 $foundDay = $repository->findOneBy(['dayname' => $inputDay->getDayname(), 'daydate' => $inputDay->getDayDate()]);
                 
                 if ($foundDay) {
@@ -98,7 +114,7 @@ class DayController extends AbstractController
 
                 $this->session->set("idDetailDay", $idDay);
     
-                return $this->redirectToRoute('dayDetail');     
+                return $this->redirectToRoute('dayDetail',['idDay' => $idDay]);     
             }
 
             return $this->render('days/dayCreate.html.twig', [
@@ -109,6 +125,7 @@ class DayController extends AbstractController
 
 
     /**
+     * Deleting chosen day
      * @Route("/remove-day/{idDay}", methods={"GET"}, name="removeDay")
      * @param int $idDay
      */
@@ -117,12 +134,17 @@ class DayController extends AbstractController
         if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
             return $this->redirectToRoute('index');     
         }
+        $repository = $this->getDoctrine()->getRepository(TDay::class);
+        $day = $repository->findOneBy(['idday'=>$idDay]);
 
-
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($day);
+        $entityManager->flush();
         return $this->redirectToRoute('agenda');
     }
 
     /**
+     * showing details - events and description of the chosen day
      * @Route("/day-detail/{idDay}", methods={"GET"}, name="dayDetail")
      * @param int $idDay
      */
@@ -152,16 +174,42 @@ class DayController extends AbstractController
     }
 
     /**
-     * @Route("/day-modify/{idDay}", methods={"GET"}, name="dayModify")
+     * updating chosen day
+     * @Route("/day-modify/{idDay}", methods={"GET","POST"}, name="dayModify")
      * @param int $idDay
      */
-    public function modifyDay(int $idDay)
+    public function modifyDay(int $idDay, Request $request)
     {
+        $errors=array();
         if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
             return $this->redirectToRoute('index');     
         }
+         
+        $entityManager = $this->getDoctrine()->getManager();
+        $foundDay = $entityManager->getRepository(TDay::class)->find($idDay);
+
+        $form = $this->createForm(DayForm::class, $foundDay);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $foundDay = $form->getData(); 
+
+            if($foundDay->getDayname()==null || $foundDay->getDayDate()==null || $foundDay->getDaybegintime()==null || $foundDay->getDayendTime()==null){
+                $errors=array();
+
+                array_push($errors, "Veuillez remplir tous les champs");
+                return $this->render('days/dayCreate.html.twig', [
+                    'form' => $form->createView(),
+                    'errors'=>$errors,
+                ]);
+            }
+            $entityManager->flush();
+
+            return $this->redirectToRoute('dayDetail',['idDay' => $idDay]);     
+        }
         return $this->render('days/modifyDay.html.twig', [
-            
+            'form' => $form->createView(),
+            'errors'=>$errors,
         ]);
     }
     

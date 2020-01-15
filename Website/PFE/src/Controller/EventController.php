@@ -9,6 +9,7 @@ use App\Entity\TEvent;
 use Symfony\Component\HttpFoundation\Request;
 use App\tempEntity\TempEvent;
 use App\Entity\TEventPriority;
+use App\Form\EventForm;
 
 class EventController extends AbstractController
 {
@@ -47,9 +48,6 @@ class EventController extends AbstractController
         if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
             return $this->redirectToRoute('index');     
         }   
-
-        $repository = $this->getDoctrine()->getRepository(TEventPriority::class);
-        $priorities = $repository->findAll();
         
         $activity = new TempEvent();
         $form = $this->createForm(EventForm::class, $activity);
@@ -58,43 +56,31 @@ class EventController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $activity = $form->getData(); 
-
-            $activity->setFkday($this->session->get('idDay'));
-
-
+            $event= new TEvent();
             
+            $repository = $this->getDoctrine()->getRepository(TEventPriority::class);
+            $priority = $repository->findOneBy(['evepriname'=>$activity->getPriority()]);
 
-            // $user->setUsepwd(password_hash($user->getUsepwd(),PASSWORD_BCRYPT));
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($user);
-            // $entityManager->flush();
-            
-            $repository = $this->getDoctrine()->getRepository(TUser::class);
-            // look for a single Product by name
-            $foundUser = $repository->findOneBy(['uselogin' => $user->getUselogin()]);
-            
-            if (!$foundUser) {
-                array_push($errors, "L'utilisateur inconnu.");
-                return $this->render('account/login.html.twig', [
-                    'form' => $form->createView(),
-                    'errors'=>$errors,
-                ]);
-            }
+            $event->setFkday($this->session->get('idDay'));
+            $event->setFkpriority($priority);
+            $event->setEvename($activity->getName());
+            $event->setEveauthor($activity->getAuthor());
+            $event->setEveclass($activity->getClass());
+            $event->setEvetotplacenum($activity->getTotalPlaces());
+            $event->setEveplaceleft($activity->getTotalPlaces());
+            $event->setEvedescription($activity->getDescription());
+            $event->setEvebegintime($activity->getStartTime());
+            $event->setEveendtime($activity->getEndTime());
+            $event->setFkuser($this->session->get("idUser"));
 
-            if(password_verify( $pwd, $foundUser->getUsepwd())){
-                $this->session->set('username', $foundUser->getUselogin());
-                $this->session->set('loggedin', true);
-                $this->session->set('iduser', $foundUser->getIduser());
-                return $this->redirectToRoute('admin');     
-            }
-            else{
-                array_push($errors, "Le mot de passe est incorrect");
-            }
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($event);
+            $entityManager->flush();
         }
             
         return $this->render('events/eventCreate.html.twig', [
             'form' => $form->createView(),
-            'errors'=>$errors,
+            'errors'=>array(),
         ]);
     }
 
@@ -122,4 +108,21 @@ class EventController extends AbstractController
             
         ]);
     }
+    /*{% for time in times %}
+                <div class="time-block"> 
+                    <div class="time-value"> 
+                        {{time.value}}
+                    </div>
+                    {% for event in events %}
+                        <div class="event">
+                            <p class="eveName">{{day.name}}</p>
+                            <p class="eveType">{{day.date}}</p>
+                            <p class="eveAuthor">{{day.beginTime}}</p>
+                            <p class="dayEnd">{{day.endTime}}</p>
+                            <a class="dayDetailBtn" href="">Supprimer</a>
+                            <a class="dayDetailBtn" href="">Modifier</a>
+                        </div>
+                {% endfor %}
+                </div>
+            {% endfor %}*/
 }

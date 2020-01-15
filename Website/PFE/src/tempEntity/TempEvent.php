@@ -136,12 +136,12 @@ class TempEvent
         return $this;
     }
 
-    public function getStartTime(): ?\DateTime
+    public function getBeginTime(): ?\DateTime
     {
         return $this->beginTime;
     }
 
-    public function setStartTime(\DateTime $beginTime): self
+    public function setBeginTime(\DateTime $beginTime): self
     {
         $this->beginTime = $beginTime;
 

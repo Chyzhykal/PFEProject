@@ -2,9 +2,13 @@
 {% block body %}
     <div class="limiter">
     <div class="wrapLimiter">
-             <div class="day">
+             <div class="dayDetail">
+                <span class="baseFormTitle">
+                    <h1>Détails de la journée</h1>
+                </span>
+                <a class="backBtn sitebtn" href={{path('agenda')}}>Agenda</a>
                 <p class="dayName">Nom du jour : {{day.name}}</p>
-                <p class="dayDescription">{{day.description}}</p>
+                <p class="dayDescription">Description : {{day.description}}</p>
                 <p class="dayDate">Date : {{day.date}}</p>
                 <p class="dayBegin">L'heure de début : {{day.beginTime}}</p>
                 <p class="dayEnd">L'heure de fin : {{day.endTime}}</p>
@@ -13,26 +17,13 @@
                 {% else %}
                     <p class="dayRepeat">L'événement est unique</p>
                 {% endif %}
-                <a class="dayDetailBtn" href={{ path('removeDay', { idDay: day.idDay })}}>Supprimer</a>
-                <a class="dayDetailBtn" href={{ path('dayModify', { idDay: day.idDay })}}>Modifier</a>
+                <a class="removeBtn sitebtn" href={{ path('removeDay', { idDay: day.idDay })}}>Supprimer</a>
+                <a class="modifyBtn sitebtn" href={{ path('dayModify', { idDay: day.idDay })}}>Modifier</a>
+                <a class="addEventBtn sitebtn" href={{ path('newevent', { idDay: day.idDay })}}>Ajouter une activité</a>
             </div>
-            {% for time in times %}
-                <div class="time-block"> 
-                    <div class="time-value"> 
-                        {{time.value}}
-                    </div>
-                    {% for event in events %}
-                        <div class="event">
-                            <p class="eveName">{{day.name}}</p>
-                            <p class="eveType">{{day.date}}</p>
-                            <p class="eveAuthor">{{day.beginTime}}</p>
-                            <p class="dayEnd">{{day.endTime}}</p>
-                            <a class="dayDetailBtn" href="">Supprimer</a>
-                            <a class="dayDetailBtn" href="">Modifier</a>
-                        </div>
-                {% endfor %}
-                </div>
-            {% endfor %}
+            <div class="dayGrid">
+
+            </div>
         </div>
     </div>
 {% endblock %}

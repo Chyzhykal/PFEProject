@@ -2,7 +2,7 @@
     margin:0;
     border:0;
     position: relative;
-    height: 100px;
+    height: 10%;
 }
 
 .navcore{
@@ -55,6 +55,8 @@
     background-color: rgba(114, 187, 83, 0.671);
     border: 1px solid rgba(114, 187, 83, 0.096);
     padding-bottom: 15px;
+    -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.64);
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.64);
 }
 
 .navtitle:hover{
@@ -72,14 +74,18 @@
     -moz-transition: all 0.4s;
     padding-bottom: 6px;
     border-bottom:1px solid #72BB53;
+   
 }
 
 .navitem2a:hover {
+    -webkit-box-shadow: none;
+    box-shadow: none;
     text-decoration: none;
     outline: none;
     background-color: inherit;
     border: 1px solid rgb(114, 187, 83);
     color: white;
+    
 }
 
 .navitem2a:focus, .navitema:focus, .navtitle:focus {

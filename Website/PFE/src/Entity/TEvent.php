@@ -101,7 +101,7 @@ class TEvent
      *
      * @ORM\ManyToOne(targetEntity="TDay")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="fkDay", referencedColumnName="idDay")
+     *   @ORM\JoinColumn(name="fkDay", referencedColumnName="idDay", onDelete="CASCADE")
      * })
      */
     private $fkday;

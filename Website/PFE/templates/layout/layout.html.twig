@@ -23,7 +23,6 @@
     <link rel="stylesheet" type="text/css" href={{asset('css/util.css')}}>
     <link rel="stylesheet" type="text/css" href={{asset('css/main.css')}}>
     <link rel="stylesheet" type="text/css" href={{asset('css/nav.css')}}>
-    <link rel="stylesheet" type="text/css" href={{asset('css/footer.css')}}>
 {% endblock %}
 
 {% block javascripts %}
@@ -52,7 +51,7 @@
                 <li class="navLink active"><a class="navitema" href={{ path('index')}}>Accuiel</a></li>
                 <li class="navLink"><a class="navitema" href={{ path('calendar')}}>Calendrier</a></li>
                 <li class="navLink"><a class="navitema" href={{ path('faq')}}>FAQ</a></li>
-                <li class="navButton"><a class="navitem2a" href={{ path('login')}}>Créer un événement</a></li>
+                <li class="navButton"><a class="navitem2a sitebtn" href={{ path('login')}}>Créer un événement</a></li>
             </ul>
     </nav>
 {% endblock %}

@@ -19,16 +19,14 @@ class DayForm extends AbstractType
     {
         $builder
             ->add('dayname', TextType::class)
-            ->add('daydescription', TextareaType::class)
+            ->add('daydescription', TextareaType::class, ['required'=>false])
             ->add('daydate', DateType::class, array('invalid_message' => 'La date n\'est pas valide', 
             'widget' => 'choice',
             'years' => range(date('Y'), date('Y')+100),
-            'months' => range(date('m'), 12),
-            'days' => range(date('d'), 31),
             ))
             ->add('dayBegintime', TimeType::class, ['invalid_message' => 'L\'heure n\'est pas valide'])
             ->add('dayEndtime', TimeType::class, ['invalid_message' => 'L\'heure n\'est pas valide'])
-            ->add('dayrepeat', CheckboxType::class)
+            ->add('dayrepeat', CheckboxType::class, ['required'=>false])
             ->add('submit', SubmitType::class, ['label' => 'Sauvegarder']);
     }
 }

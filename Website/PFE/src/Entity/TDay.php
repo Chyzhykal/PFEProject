@@ -41,7 +41,6 @@ class TDay
      * @var string
      * 
      * @ORM\Column(name="dayDescription", type="string", length=255, nullable=true)
-     * @Assert\NotBlank
      * @Assert\Type(
      *     type="string",
      *     message="Le champ est de type texte"
@@ -78,12 +77,32 @@ class TDay
     private $dayendtime;
 
     /**
-     * @Assert\NotBlank
+     *
      * @var bool
      * 
-     * @ORM\Column(name="dayRepeat", type="boolean", nullable=false)
+     * @ORM\Column(name="dayRepeat", type="boolean", nullable=true)
      */
     private $dayrepeat=true;
+
+    /**
+     * 
+     * @var bool
+     * 
+     * @ORM\Column(name="dayDeleted", type="boolean", nullable=false)
+     */
+    private $daydeleted=false;
+
+    public function getDaydeleted(): ?bool
+    {
+        return $this->daydeleted;
+    }
+
+    public function setDaydeleted(bool $daydeleted): self
+    {
+        $this->daydeleted = $daydeleted;
+
+        return $this;
+    }
 
     public function getDayrepeat(): ?bool
     {

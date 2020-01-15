@@ -5,56 +5,70 @@
         <div class="wrapAdminAdd p-b-120 p-t-20">
             {{ form_start(form, {'method': 'POST' , 'attr':{'class': 'baseForm validate-form'}}) }}
                 <span class="baseFormTitle ">
-                    <h1>Ajouter une journée :</h1>
+                    <h1>Ajouter une activité :</h1>
                 </span>
                
-                <div class="baseText validate-input" data-validate = "C'est un champ obligatoire">
-                    <span class="label-baseInput label-input100">Le nom de la journée (45 caractères max)</span>
-                    {{ form_widget(form.dayname, { 'attr': {'class': 'baseInput textInput '}, 'value': '' }) }}
+                <div class="baseText baseSelect validate-input" data-validate = "C'est un champ obligatoire">
+                    <span class="label-baseInput label-input100">Type d'activité</span>
+                    {{ form_widget(form.priority, { 'attr': {'class': 'baseInput textInput '}, 'value': '' }) }}
                 </div>
                 <div class="formErrors">
-                    {{ form_errors(form.dayname) }}
+                    {{ form_errors(form.priority) }}
                 </div>    
 
                   <div class="baseText validate-input" data-validate = "C'est un champ obligatoire">
-                    <span class="label-baseInput label-input100">Description (optionnel, 255 caractères max)</span>
-                    {{ form_widget(form.daydescription, { 'attr': {'class': 'baseInput textInput '}, 'value': '' }) }}
+                    <span class="label-baseInput label-input100">Nom de l'activité (255 caractères max)</span>
+                    {{ form_widget(form.name, { 'attr': {'class': 'baseInput textInput '}, 'value': '' }) }}
                 </div>
                 <div class="formErrors">
-                    {{ form_errors(form.daydescription) }}
+                    {{ form_errors(form.name) }}
                 </div>    
                         
                 <div class="baseDate validate-input" data-validate="C'est un champ obligatoire">
-                    <span class="label-baseInput label-input100">La date de la journée</span>
-                    {{ form_widget(form.daydate, { 'attr': {'class': 'baseInput'} }) }}
+                    <span class="label-baseInput label-input100">Auteur/Intervenant</span>
+                    {{ form_widget(form.author, { 'attr': {'class': 'baseInput textInput'} }) }}
                 </div>
                 <div class="formErrors">
-                    {{ form_errors(form.daydate) }}
+                    {{ form_errors(form.author) }}
                 </div>  
 
                 <div class="baseTime validate-input" data-validate="C'est un champ obligatoire">
-                    <span class="label-baseInput label-input100">L'heure de début</span>
-                    {{ form_widget(form.dayBegintime, { 'attr': {'class': 'baseInput'} }) }}
+                    <span class="label-baseInput label-input100">L'emplacement de l'activité</span>
+                    {{ form_widget(form.class, { 'attr': {'class': 'baseInput textInput'} }) }}
                 </div>
                 <div class="formErrors">
-                    {{ form_errors(form.dayBegintime) }}
+                    {{ form_errors(form.class) }}
+                </div>  
+                <div class="baseNumeric validate-input" data-validate="C'est un champ obligatoire">
+                    <span class="label-baseInput label-input100">Nombre de places</span>
+                    {{ form_widget(form.totalPlaces, { 'attr': {'class': 'baseInput'} }) }}
+                </div>
+                <div class="formErrors">
+                    {{ form_errors(form.totalPlaces) }}
+                </div>  
+                 <div class="validate-input" data-validate="C'est un champ obligatoire">
+                    <span class="label-baseInput label-input100">Description de l'activité</span>
+                    {{ form_widget(form.description, { 'attr': {'class': 'baseInput'} }) }}
+                </div>
+                <div class="formErrors">
+                    {{ form_errors(form.description) }}
                 </div>  
                 <div class="baseTime validate-input" data-validate="C'est un champ obligatoire">
+                    <span class="label-baseInput label-input100">L'heure de début</span>
+                    {{ form_widget(form.beginTime, { 'attr': {'class': 'baseInput'} }) }}
+                </div>
+                <div class="formErrors">
+                    {{ form_errors(form.beginTime) }}
+                </div>  
+                 <div class="baseTime validate-input" data-validate="C'est un champ obligatoire">
                     <span class="label-baseInput label-input100">L'heure de fin</span>
-                    {{ form_widget(form.dayEndtime, { 'attr': {'class': 'baseInput'} }) }}
+                    {{ form_widget(form.endTime, { 'attr': {'class': 'baseInput'} }) }}
                 </div>
                 <div class="formErrors">
-                    {{ form_errors(form.dayEndtime) }}
-                </div>  
-                <div class="checkBxContainer validate-input" data-validate="C'est un champ obligatoire">
-                    <span class="label-baseInput label-input100">Répéter chaque année</span>
-                    {{ form_widget(form.dayrepeat, { 'attr': {'class': 'baseInput checkBx'} }) }}
-                </div>
-                <div class="formErrors">
-                    {{ form_errors(form.dayrepeat) }}
-                </div>  
+                    {{ form_errors(form.endTime) }}
+                </div> 
                 <div class="baseSubmit">
-                    {{ form_widget(form.submit, { 'attr': {'class': 'baseFormButton'} }) }}
+                    {{ form_widget(form.submit, { 'attr': {'class': 'baseFormButton sitebtn'} }) }}
                 </div>
                   
             {{ form_end(form) }}

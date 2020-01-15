@@ -42,7 +42,6 @@
     margin-top: 5px;
     background-color: transparent;
     color: #fefefe;
-    display: block;
 }
 
 .textInput{
@@ -68,9 +67,7 @@
 }
 
 .checkBxContainer {
-    display: block;
     position: relative;
-   
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -84,7 +81,6 @@
 	background-color: #0702026e;
 	border: 1px solid #cacece;
 	border-radius: 3px;
-	display: block;
     position: relative;
     width: 25px;
     height:25px;
@@ -109,4 +105,31 @@
 	top: 0;
 	left: 5px;
 	color: #fefefe;
+}
+
+.baseSelect {
+    display: block;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    color:#fefefe;
+}
+.baseSelect::-ms-expand {
+    display: none;
+    color:#fefefe;
+}
+.baseSelect:hover {
+    color:#fefefe;
+    border-color: #888;
+}
+.baseSelect:focus {
+    border-color: #aaa;
+    outline: none;
+    color:#fefefe;
+}
+.baseSelect option {
+    background-color: rgba(4, 0, 61, 0.616);
+    font-weight:normal;
+    color:#fefefe;
 }
