@@ -10,7 +10,7 @@
                
                 <div class="baseText baseSelect validate-input" data-validate = "C'est un champ obligatoire">
                     <span class="label-baseInput label-input100">Type d'activité</span>
-                    {{ form_widget(form.priority, { 'attr': {'class': 'baseInput textInput '}, 'value': '' }) }}
+                    {{ form_widget(form.priority, { 'attr': {'class': 'baseInput textInput selectInput'}, 'value': '' }) }}
                 </div>
                 <div class="formErrors">
                     {{ form_errors(form.priority) }}
@@ -41,14 +41,14 @@
                 </div>  
                 <div class="baseNumeric validate-input" data-validate="C'est un champ obligatoire">
                     <span class="label-baseInput label-input100">Nombre de places</span>
-                    {{ form_widget(form.totalPlaces, { 'attr': {'class': 'baseInput'} }) }}
+                    {{ form_widget(form.totalPlaces, { 'attr': {'class': 'baseInput textInput'} }) }}
                 </div>
                 <div class="formErrors">
                     {{ form_errors(form.totalPlaces) }}
                 </div>  
-                 <div class="validate-input" data-validate="C'est un champ obligatoire">
+                 <div class="baseText validate-input" data-validate="C'est un champ obligatoire">
                     <span class="label-baseInput label-input100">Description de l'activité</span>
-                    {{ form_widget(form.description, { 'attr': {'class': 'baseInput'} }) }}
+                    {{ form_widget(form.description, { 'attr': {'class': 'baseInput textInput'} }) }}
                 </div>
                 <div class="formErrors">
                     {{ form_errors(form.description) }}
@@ -67,8 +67,15 @@
                 <div class="formErrors">
                     {{ form_errors(form.endTime) }}
                 </div> 
+                 <div class="checkBxContainer validate-input" data-validate="C'est un champ obligatoire">
+                    <span class="label-baseInput label-input100">Cette activité est lié à une autre activité</span>
+                    {{ form_widget(form.eventRelated, { 'attr': {'class': 'baseInput checkBx relateEvent'} }) }}
+                </div>
+                <div class="formErrors">
+                    {{ form_errors(form.eventRelated) }}
+                </div>  
                 <div class="baseSubmit">
-                    {{ form_widget(form.submit, { 'attr': {'class': 'baseFormButton sitebtn'} }) }}
+                    {{ form_widget(form.submit, { 'attr': {'class': 'baseFormButton sitebtn relateChangeBtn'} }) }}
                 </div>
                   
             {{ form_end(form) }}

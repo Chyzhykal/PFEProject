@@ -1,17 +1,49 @@
-{% extends 'layout/layoutAdmin.html.twig' %}
+{% extends 'layout/layoutDay.html.twig' %}
 {% block body %}
-<div class="limiter">
+    <div class="limiter">
     <div class="wrapLimiter">
-        <div class="wrapAdminHome p-b-120 p-t-20">
-            <ul class="adminMenu">
-                <li class="adminButton1 ableft" ><a class="wrap-adminButton1" href={{ path('showdays')}}>Afficher les journées</a></li>
-                <li class="adminButton1 abright"><a class="wrap-adminButton1" href={{ path('showevents')}}>Afficher les événements</a></li>
-            </ul>
-            <ul class="adminMenu">
-                <li class="adminButton2 ableft"><a class="wrap-adminButton2" href={{ path('newday')}}>Ajouter une journée</a></li>
-                <li class="adminButton2 abright"><a class="wrap-adminButton2" href={{ path('newevent')}}>Ajouter un événement</a></li>
-            </ul>
+             <div class="dayDetail">
+                <span class="baseFormTitle">
+                    <h1>Détails de l'activité</h1>
+                </span>
+                <a class="backBtn sitebtn" href={{path('agenda')}}>Agenda</a>
+
+                {% if activity.priorityCode < 9 %}
+                   <p class="eventPriority" style="background-color:rgba(114, 187, 83, 0.425);">Priorité de l'évenement: {{activity.priority}}</p>
+                {% elseif activity.priorityCode > 10 and activity.priorityCode <= 15  %}
+                    <p class="eventPriority" style="background-color:rgba(170, 64, 64, 0.425);">Priorité de l'évenement: {{activity.priority}}</p>
+                {% elseif activity.priorityCode == 10 or activity.priorityCode == 9 %}
+                    <p class="eventPriority" style="background-color:rgba(170, 163, 64, 0.425);">Priorité de l'évenement: {{activity.priority}}</p>
+                {% else %}
+                    <p class="eventPriority" style="background-color:rgba(59, 43, 97, 0.425);">Priorité de l'évenement: {{activity.priority}}</p>
+                {% endif %}
+                <p class="eventName">Nom de l'activité : {{activity.name}}</p>
+                <p class="eventAuthor">Intervenant: {{activity.intervenant}}</p>
+                <p class="eventDescription">Description : {{activity.description}}</p>
+                <p class="eventBegin">L'heure de début : {{activity.beginTime}}</p>
+                <p class="eventEnd">L'heure de fin : {{activity.endTime}}</p>
+                <p class="eventClass">L'emplacement : {{activity.class}}</p>
+                <p class="eventPlaces">Nombre de places au total : {{activity.totalPlaces}}</p>
+                <p class="eventPlacesLeft">Nombre de places restant : {{activity.leftPlaces}}</p>
+
+                <p class="eventCreator">L'activité crée par: {{activity.creator}}</p>
+                {% if activity.idLinked != "" %}
+                    <h5>Activité lié :</h5>
+                    <p class="eventName">Nom de l'activité : {{activity.nameLinked}}</p>
+                    <p class="eventBegin">L'heure de début : {{activity.beginTimeLinked}}</p>
+                    <p class="eventEnd">L'heure de fin : {{activity.endTimeLinked}}</p>
+
+                {% else %}
+                    <p class="eventName">L'activité est unique</p>
+                {% endif %} 
+                
+                <a class="removeBtn sitebtn" href={{ path('removeEvent', { idActivity: activity.idActivity })}}>Supprimer</a>
+                <a class="modifyBtn sitebtn" href={{ path('eventModify', { idActivity: activity.idActivity })}}>Modifier</a>
+            
+            </div>
+            <div class="dayGrid">
+
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="t_event", uniqueConstraints={@ORM\UniqueConstraint(name="idEvent_UNIQUE", columns={"idEvent"})}, indexes={
  * @ORM\Index(name="fk_t_event_t_user1_idx", columns={"fkUser"}), 
- * @ORM\Index(name="fk_t_event_t_event1", columns={"fkLinkedEvent"}), 
  * @ORM\Index(name="fk_t_event_t_day1_idx", columns={"fkDay"}), 
  * @ORM\Index(name="fk_t_event_t_priority_idx", columns={"fkPriority"})
  * })
@@ -107,16 +106,6 @@ class TEvent
     private $fkday;
 
     /**
-     * @var TEvent
-     *
-     * @ORM\ManyToOne(targetEntity="TEvent")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="fkLinkedEvent", referencedColumnName="idEvent")
-     * })
-     */
-    private $fklinkedevent;
-
-    /**
      * @var TUser
      *
      * @ORM\ManyToOne(targetEntity="TUser")
@@ -151,6 +140,25 @@ class TEvent
      * })
      */
     private $fkpriority;
+
+     /**
+     * @var bool
+     *
+     * @ORM\Column(name="isMerged", type="boolean", nullable=true)
+     */
+    private $ismerged=false;
+
+    public function getIsmerged(): ?bool
+    {
+        return $this->ismerged;
+    }
+
+    public function setIsmerged(bool $ismerged): self
+    {
+        $this->ismerged = $ismerged;
+
+        return $this;
+    }
 
     /**
      * Constructor
@@ -281,18 +289,6 @@ class TEvent
     public function setFkday(?TDay $fkday): self
     {
         $this->fkday = $fkday;
-
-        return $this;
-    }
-
-    public function getFklinkedevent(): ?TEvent
-    {
-        return $this->fklinkedevent;
-    }
-
-    public function setFklinkedevent(?self $fklinkedevent): self
-    {
-        $this->fklinkedevent = $fklinkedevent;
 
         return $this;
     }

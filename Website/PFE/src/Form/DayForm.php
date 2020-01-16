@@ -24,8 +24,12 @@ class DayForm extends AbstractType
             'widget' => 'choice',
             'years' => range(date('Y'), date('Y')+100),
             ))
-            ->add('dayBegintime', TimeType::class, ['invalid_message' => 'L\'heure n\'est pas valide'])
-            ->add('dayEndtime', TimeType::class, ['invalid_message' => 'L\'heure n\'est pas valide'])
+            ->add('dayBegintime', TimeType::class, ['invalid_message' => 'L\'heure n\'est pas valide',
+            'minutes' => range(0, 59, 15),
+            ])
+            ->add('dayEndtime', TimeType::class, ['invalid_message' => 'L\'heure n\'est pas valide',
+            'minutes' => range(0, 59, 15),
+            ])
             ->add('dayrepeat', CheckboxType::class, ['required'=>false])
             ->add('submit', SubmitType::class, ['label' => 'Sauvegarder']);
     }

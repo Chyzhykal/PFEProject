@@ -1,0 +1,39 @@
+{% extends 'layout/layoutDay.html.twig' %}
+{% block body %}
+<div class="limiter">
+    <div class="wrapLimiter">
+        <div class="wrapAdminAdd p-b-120 p-t-20">
+            {{ form_start(form, {'method': 'POST' , 'attr':{'class': 'baseForm validate-form'}}) }}
+                <span class="baseFormTitle ">
+                    <h1>Lier les activités :</h1>
+                </span>
+               
+                <div class="baseText baseSelect validate-input" data-validate = "C'est un champ obligatoire">
+                    <span class="label-baseInput label-input100">Choisir l'activité</span>
+                    {{ form_widget(form.relatedEvent, { 'attr': {'class': 'baseInput textInput selectInput'}, 'value': '' }) }}
+                </div>
+                <div class="formErrors">
+                    {{ form_errors(form.relatedEvent) }}
+                </div>  
+
+                <div class="checkBxContainer validate-input" data-validate="C'est un champ obligatoire">
+                    <span class="label-baseInput label-input100">Fussionner les activités</span>
+                    {{ form_widget(form.eventSuite, { 'attr': {'class': 'baseInput checkBx relateEvent'} }) }}
+                </div>
+                <div class="formErrors">
+                    {{ form_errors(form.eventSuite) }}
+                </div>  
+                <div class="baseSubmit">
+                    {{ form_widget(form.submit, { 'attr': {'class': 'baseFormButton sitebtn relateChangeBtn'} }) }}
+                </div>
+                  
+            {{ form_end(form) }}
+        <ul class="formErrors">
+            {% for error in errors %}
+                <li>{{ error}}</li>
+            {% endfor %}
+        </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

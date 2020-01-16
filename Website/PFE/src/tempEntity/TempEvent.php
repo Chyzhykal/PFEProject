@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\TUser;
+use App\Entity\TEventPriority;
 
 /**
  * TempEvent
@@ -17,7 +18,7 @@ class TempEvent
 {
 
     /**
-     * @var string
+     * @var TEventPriority
      *
      */
     private $priority;
@@ -64,6 +65,24 @@ class TempEvent
      */
     private $endTime;
 
+    /**
+     * @var bool
+     *
+     */
+    private $eventRelated;
+
+    public function getEventRelated(): ?bool
+    {
+        return $this->eventRelated;
+    }
+
+    public function setEventRelated(bool $eventRelated): self
+    {
+        $this->eventRelated = $eventRelated;
+        
+        return $this;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -76,12 +95,12 @@ class TempEvent
         return $this;
     }
 
-    public function getPriority(): ?string
+    public function getPriority(): ?TEventPriority
     {
         return $this->priority;
     }
 
-    public function setPriority(string $priority): self
+    public function setPriority(TEventPriority $priority): self
     {
         $this->priority = $priority;
 

@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * ETML
+ * Author : Chyzhyk Aleh
+ * Date : 16.01.2020
+ * Description : Day controller - controls agenda, create, detail, modify and delete days for admin
+ */
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,7 +14,6 @@ use App\Entity\TDay;
 use App\Form\DayForm;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\TEvent;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class DayController extends AbstractController
 {
@@ -27,26 +31,32 @@ class DayController extends AbstractController
     }
 
     /**
+     * Agenda, displays days
      * @Route("/agenda", name="agenda")
      */
     public function index()
     {
+        //Getting days from repository by date and time
         $repository = $this->getDoctrine()->getRepository(TDay::class);
         $foundDays = $repository->findBy(array('daydeleted'=>false), array('daydate' => 'ASC', 'daybegintime'=>'ASC'));
-        $date = new DateTime();
+
+        //If any day which must repeat each year has date less than today - 
+        $date = new \DateTime();
         for($i=0;$i<count($foundDays); $i++){
-            if($foundDays[$i]->getDaydate()>$date && $foundDays[$i]->getDayrepeat()==true){
-                $foundDays[$i]->setDaydate($date);
+            if($foundDays[$i]->getDaydate()<$date && $foundDays[$i]->getDayrepeat()==true){
                 $entityManager = $this->getDoctrine()->getManager();
                 $foundDay = $entityManager->getRepository(TDay::class)->find($foundDays[$i]->getIdday());
+                $date= $foundDays[$i]->getDaydate();
+                $date->modify('+1 year');
                 $foundDay->setDaydate($date);
+                $foundDays[$i]=$foundDay;
                 $entityManager->flush();
             }
-            elseif($foundDays[$i]->getDaydate()>$date && $foundDays[$i]->getDayrepeat()==false){
-                $foundDays[$i]->setDaydeleted(true);
+            elseif($foundDays[$i]->getDaydate()<$date && $foundDays[$i]->getDayrepeat()==false){
                 $entityManager = $this->getDoctrine()->getManager();
                 $foundDay = $entityManager->getRepository(TDay::class)->find($foundDays[$i]->getIdday());
                 $foundDay->setDaydeleted(true);
+                $foundDays[$i]=$foundDay;
                 $entityManager->flush();
             }
         }
@@ -168,6 +178,7 @@ class DayController extends AbstractController
         $events = $repository->findBy(['fkday'=>$idDay]);
 
         $this->session->set('idDay', $idDay);
+
         return $this->render('days/dayDetail.html.twig', [
             'day'=>$foundDay,
         ]);
@@ -178,7 +189,7 @@ class DayController extends AbstractController
      * @Route("/day-modify/{idDay}", methods={"GET","POST"}, name="dayModify")
      * @param int $idDay
      */
-    public function modifyDay(int $idDay, Request $request)
+    public function modifyDay(int $idDay, Request $request) 
     {
         $errors=array();
         if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
@@ -210,6 +221,7 @@ class DayController extends AbstractController
         return $this->render('days/modifyDay.html.twig', [
             'form' => $form->createView(),
             'errors'=>$errors,
+            'idDay'=>$idDay,
         ]);
     }
     

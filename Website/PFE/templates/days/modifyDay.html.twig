@@ -57,7 +57,7 @@
                 <div class="baseSubmit">
                     {{ form_widget(form.submit, { 'attr': {'class': 'baseFormButton sitebtn'} }) }}
                 </div>
-                 <a class="backBtn" href={{path('agenda')}}>Retour</a>  
+                 <a class="backBtn" href={{ path('dayDetail', { idDay: idDay })}}>Retour</a>  
             {{ form_end(form) }}
         <ul class="formErrors">
             {% for error in errors %}
