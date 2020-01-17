@@ -148,6 +148,25 @@ class TEvent
      */
     private $ismerged=false;
 
+      /**
+     * @var bool
+     *
+     * @ORM\Column(name="isMaster", type="boolean", nullable=true)
+     */
+    private $ismaster=true;
+
+    public function getIsmaster(): ?bool
+    {
+        return $this->ismaster;
+    }
+
+    public function setIsmaster(bool $ismaster): self
+    {
+        $this->ismaster = $ismaster;
+
+        return $this;
+    }
+
     public function getIsmerged(): ?bool
     {
         return $this->ismerged;

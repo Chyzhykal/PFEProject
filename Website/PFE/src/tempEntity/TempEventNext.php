@@ -23,12 +23,6 @@ class TempEventNext
     private $relatedEvent;
 
     /**
-     * @var int
-     *
-     */
-    private $relatedActivityId;
-
-    /**
      * @var bool
      *
      */
@@ -45,19 +39,7 @@ class TempEventNext
         
         return $this;
     }
-
-    public function getRelatedActivityId(): ?int
-    {
-        return $this->relatedActivityId;
-    }
-
-    public function setRelatedActivityId(int $relatedActivityId): self
-    {
-        $this->relatedActivityId = $relatedActivityId;
-
-        return $this;
-    }
-
+    
     public function getEventSuite(): ?bool
     {
         return $this->eventSuite;

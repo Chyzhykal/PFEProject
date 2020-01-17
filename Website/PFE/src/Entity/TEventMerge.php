@@ -32,7 +32,7 @@ class TEventMerge
      *   @ORM\JoinColumn(name="fkEvent1", referencedColumnName="idEvent")
      * })
      */
-    private $fkevent1;
+    private $fkeventmaster;
 
     /**
      * @var TEvent
@@ -42,33 +42,33 @@ class TEventMerge
      *   @ORM\JoinColumn(name="fkEvent2", referencedColumnName="idEvent")
      * })
      */
-    private $fkevent2;
+    private $fkeventchild;
 
     public function getIdmerge(): ?int
     {
         return $this->idmerge;
     }
 
-    public function getFkevent1(): ?TEvent
+    public function getFkeventmaster(): ?TEvent
     {
-        return $this->fkevent1;
+        return $this->fkeventmaster;
     }
 
-    public function setFkevent1(TEvent $fkevent1): self
+    public function setFkeventmaster(TEvent $fkeventmaster): self
     {
-        $this->fkevent1 = $fkevent1;
+        $this->fkeventmaster = $fkeventmaster;
 
         return $this;
     }
 
-    public function getFkevent2(): ?TEvent
+    public function getFkeventchild(): ?TEvent
     {
-        return $this->fkevent2;
+        return $this->fkeventchild;
     }
 
-    public function setFkEvent2(TEvent $fkevent2): self
+    public function setFkEventchild(TEvent $fkeventchild): self
     {
-        $this->fkevent2 = $fkevent2;
+        $this->fkeventchild = $fkeventchild;
 
         return $this;
     }

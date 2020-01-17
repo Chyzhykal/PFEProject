@@ -25,8 +25,18 @@
                 <p class="eventClass">L'emplacement : {{activity.class}}</p>
                 <p class="eventPlaces">Nombre de places au total : {{activity.totalPlaces}}</p>
                 <p class="eventPlacesLeft">Nombre de places restant : {{activity.leftPlaces}}</p>
-
                 <p class="eventCreator">L'activité crée par: {{activity.creator}}</p>
+
+                {% if activity.isMaster == true %}
+                    <h5>C'est une activité parent. Les autres activités sont liées à cette activité:</h5>
+                    <p class="eventName">Nom de l'activité : {{activity.nameLinked}}</p>
+                    <p class="eventBegin">L'heure de début : {{activity.beginTimeLinked}}</p>
+                    <p class="eventEnd">L'heure de fin : {{activity.endTimeLinked}}</p>
+
+                {% else %}
+                    <p class="eventName">L'activité est unique</p>
+                {% endif %} 
+
                 {% if activity.idLinked != "" %}
                     <h5>Activité lié :</h5>
                     <p class="eventName">Nom de l'activité : {{activity.nameLinked}}</p>

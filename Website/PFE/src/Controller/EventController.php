@@ -59,38 +59,19 @@ class EventController extends AbstractController
         $endTime=$activity->getEveendtime()->format('H\hi');
         $dayName=$activity->getFkday()->getDayname();
         $idDay=$activity->getFkday()->getIdday();
-        $creator=$activity->getFkUser()->getUselogin();
-
-
+        $creator=$activity->getFkuser()->getUselogin();
+        $isMaster=$activity->getIsmaster();
+        
         $repository = $this->getDoctrine()->getRepository(TEventMerge::class);
-        $merges = $repository->findBy(['fkevent1'=>$activity]);
-        $merges2 = $repository->findBy(['fkevent2'=>$activity]);
-        array_push($merges, $merges2);
-
-        $mergedActivities=array();
-        if($merges!=null){
-            foreach($merges as $merge){
-
-                $idLinked = "";
-                $nameLinked = "";
-                $beginTimeLinked = "";
-                $endTimeLinked = "";
-                if($merge->getFkevent1()==$activity){
-                    $idLinked = $merge->getFkevent2()->getIdevent();
-                    $nameLinked = $merge->getFkevent2()->getEvename();
-                    $beginTimeLinked = $merge->getFkevent2()->getEvebegintime()->format('H\hi');
-                    $endTimeLinked = $merge->getFkevent2()->getEveendtime()->format('H\hi');
-                }
-                else{
-                    $idLinked = $merge->getFkevent1()->getIdevent();
-                    $nameLinked = $merge->getFkevent1()->getEvename();
-                    $beginTimeLinked = $merge->getFkevent1()->getEvebegintime()->format('H\hi');
-                    $endTimeLinked = $merge->getFkevent1()->getEveendtime()->format('H\hi');
-                }
-                array_push($mergedActivities, array('idLinked'=>$idLinked,'nameLinked'=>$nameLinked,'beginTimeLinked'=>$beginTimeLinked,'endTimeLinked'=>$endTimeLinked));
-            } 
+        $merges=null;
+        $merge=null;
+        if($isMaster){
+            $merges = $repository->findBy(['fkeventmaster'=>$activity]);
         }
-
+        else{
+            $merge = $repository->findBy(['fkeventchild'=>$activity]);
+            $merges = $repository->findBy(['fkeventmaster'=>$merge->getFkeventmaster()]);
+        }
         $foundActivity=array(
             'priorityCode'=>$priorityCode,
             'idDay'=>$idDay,
@@ -106,7 +87,9 @@ class EventController extends AbstractController
             'endTime'=>$endTime,
             'dayName'=>$dayName,
             'creator'=>$creator,
-            'mergedActivities'=>$mergedActivities
+            'mergesMaster'=>$merges,
+            'mergeChild'=>$merge,
+            'isMaster'=>$isMaster
         );
 
 
@@ -156,6 +139,7 @@ class EventController extends AbstractController
             $event->setFkuser($user);
 
             $entityManager = $this->getDoctrine()->getManager();
+            $event->setIsmaster(!getEventRelated());
             $entityManager->persist($event);
             $entityManager->flush();
             $idActivity = $event->getIdevent();
@@ -163,6 +147,7 @@ class EventController extends AbstractController
             if($activity->getEventRelated()==true){
                 return $this->redirectToRoute('neweventNext',['idActivity' => $idActivity]);
             }
+
             return $this->redirectToRoute('activityDetail',['idActivity' => $idActivity]);
         }
             
@@ -184,16 +169,15 @@ class EventController extends AbstractController
         }   
 
         $entityManager = $this->getDoctrine()->getManager();
-        $day = $entityManager->getRepository(TDay::class)->find($this->session->get('idDay'));
+        $activityChild = $entityManager->getRepository(TEvent::class)->find($idActivity);
 
         $repository = $this->getDoctrine()->getRepository(TEvent::class);
-
         // Add a not equals parameter to your criteria
         $criteria = Criteria::create()
-        ->andWhere(Criteria::expr()->neq('idevent', $idActivity))
-        ->andWhere(Criteria::expr()->eq('fkday', $day));
+        ->andWhere(Criteria::expr()->eq('fkday', $activityChild->getFkday()))
+        ->andWhere(Criteria::expr()->eq('ismaster', true));
         // Find all from the repository matching your criteria
-    
+
         $activities=$repository->matching($criteria);
         $dayEvents= new DayEvents();
         $dayEvents->setEvents($activities);
@@ -206,31 +190,18 @@ class EventController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $entityManager = $this->getDoctrine()->getManager();
-            
             $formData = $form->getData(); 
 
-            $activity = $entityManager->getRepository(TEvent::class)->find($idActivity);
-
-            $activity2 = $entityManager->getRepository(TEvent::class)->find($formData->getRelatedEvent()->getIdevent());
-
-            $repository = $this->getDoctrine()->getRepository(TEventMerge::class);
-            $merges = $repository->findBy(['fkevent1'=>$activity]);
-            $merges3 = $repository->findBy(['fkevent2'=>$activity]);
-            array_push($merges, $merges3);
-
-            $merges2 = $repository->findBy(['fkevent1'=>$activity2]);
-            $merges4 = $repository->findBy(['fkevent2'=>$activity2]);
-            array_push($merges2, $merges4);
-
-
-            $activity->setFklinkedevent($formData->getRelatedEvent());
-            $activity->setIsmerged($formData->getEventSuite());
+            $activityChild->setIsmerged($formData->getEventSuite());
             $entityManager->flush();
-        
-            $activity2 = $entityManager->getRepository(TEvent::class)->find($formData->getRelatedEvent()->getIdevent());
-            $activity2->setFklinkedevent($activity);
-            $activity2->setIsmerged($formData->getEventSuite());
+
+            $activityMaster=$formData->getRelatedEvent();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $merge = new TEventMerge();
+            $merge->setFkeventmaster($activityMaster);
+            $merge->setFkEventchild($activityChild);
+            $entityManager->persist($merge);
             $entityManager->flush();
 
             return $this->redirectToRoute('activityDetail',['idActivity' => $idActivity]);
