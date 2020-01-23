@@ -22,11 +22,42 @@ class TempEventNext
      */
     private $relatedEvent;
 
-    /**
-     * @var bool
+     /**
+     * @var \DateTime
      *
      */
-    private $eventSuite;
+    private $beginTime;
+
+    /**
+     * @var \DateTime
+     *
+     */
+    private $endTime;
+
+
+    public function getBeginTime(): ?\DateTime
+    {
+        return $this->beginTime;
+    }
+
+    public function setBeginTime(\DateTime $beginTime): self
+    {
+        $this->beginTime = $beginTime;
+
+        return $this;
+    }
+
+    public function getEndTime(): ?\DateTime
+    {
+        return $this->endTime;
+    }
+
+    public function setEndTime(\DateTime $endTime): self
+    {
+        $this->endTime = $endTime;
+
+        return $this;
+    }
 
     public function getRelatedEvent(): ?TEvent
     {
@@ -37,18 +68,6 @@ class TempEventNext
     {
         $this->relatedEvent = $relatedEvent;
         
-        return $this;
-    }
-    
-    public function getEventSuite(): ?bool
-    {
-        return $this->eventSuite;
-    }
-
-    public function setEventSuite(bool $eventSuite): self
-    {
-        $this->eventSuite = $eventSuite;
-
         return $this;
     }
 }

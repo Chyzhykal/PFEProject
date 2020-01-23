@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\TEventPriority;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EventForm extends AbstractType
 {
@@ -39,16 +40,27 @@ class EventForm extends AbstractType
                 'placeholder' => [
                     'hour' => 'Heure', 'minute' => 'Minute'
                 ],
-                'minutes' => range(0, 59, 15),
+                'minutes' => range(0,59, 15),
+                'hours' => range($options['limitBeginH'],$options['limitEndH']),
             ])
             ->add('endTime', TimeType::class, [
                 'invalid_message' => 'Le temps n\'est pas valide',
                 'placeholder' => [
                     'hour' => 'Heure', 'minute' => 'Minute'
                 ],
-                'minutes' => range(0, 59, 15),
+                'minutes' => range(0,59, 15),
+                'hours' => range($options['limitBeginH'],$options['limitEndH']),
             ])
-            ->add('eventRelated', CheckboxType::class, ['required'=>false])
             ->add('submit', SubmitType::class, ['label' => 'Créer']);
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'limitBeginH' => "0",
+            'limitEndH' => "0",
+        ]);
+        $resolver->setAllowedTypes('limitBeginH', 'string');
+        $resolver->setAllowedTypes('limitEndH', 'string');
     }
 }

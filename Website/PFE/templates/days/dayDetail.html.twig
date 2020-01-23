@@ -6,7 +6,7 @@
                 <span class="baseFormTitle">
                     <h1>Détails de la journée</h1>
                 </span>
-                <a class="backBtn sitebtn" href={{path('agenda')}}>Retour</a>
+                <a class="backBtn sitebtn" href={{path('agenda')}}>Liste de jours</a>
                 <p class="dayName">Nom du jour : {{day.name}}</p>
                 <p class="dayDescription">Description : {{day.description}}</p>
                 <p class="dayDate">Date : {{day.date}}</p>
@@ -19,10 +19,27 @@
                 {% endif %}
                 <a class="removeBtn sitebtn" href={{ path('removeDay', { idDay: day.idDay })}}>Supprimer</a>
                 <a class="modifyBtn sitebtn" href={{ path('dayModify', { idDay: day.idDay })}}>Modifier</a>
-                <a class="addEventBtn sitebtn" href={{ path('newevent', { idDay: day.idDay })}}>Ajouter une activité</a>
+                <a class="addEventBtn sitebtn" href={{ path('selectevent', { idDay: day.idDay })}}>Ajouter une activité</a>
             </div>
-            <div class="dayGrid">
-
+            <div class="dayGrid" style="grid-template-columns:{{gridAutoStyle}};">
+                
+                {% for time in timeTable %}
+                    {% for event in events %}
+                      {% if event.beginTime == time.key %}
+                        <div class="eventBlock">
+                            {% if day.repeat == true %}
+                                <img src={{asset('images/repeat.png')}} class="repeatIcon"/>
+                            {% else %}
+                                <img src={{asset('images/one.png')}} class="repeatIcon"/>
+                            {% endif %}
+                            <p class="dayName">Nom du jour : {{day.name}}</p>
+                            <p class="dayDate">Date : {{day.date}}</p>
+                            <p class="dayBegin">L'heure de début : {{day.beginTime}}</p>
+                            <p class="dayEnd">L'heure de fin : {{day.endTime}}</p>
+                            <a class="dayDetailBtn sitebtn" href={{ path('dayDetail', { idDay: day.idDay })}}>Afficher les détails</a>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
             </div>
         </div>
     </div>

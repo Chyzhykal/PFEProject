@@ -2,54 +2,61 @@
 {% block body %}
     <div class="limiter">
     <div class="wrapLimiter">
-             <div class="dayDetail">
+             <div class="dayDetail eventDetail">
                 <span class="baseFormTitle">
                     <h1>Détails de l'activité</h1>
                 </span>
-                <a class="backBtn sitebtn" href={{path('agenda')}}>Agenda</a>
+                <a class="backBtn sitebtn" href={{ path('dayDetail', { idDay: activity.idDay })}}>Journée "{{activity.dayName}}"</a>
 
                 {% if activity.priorityCode < 9 %}
-                   <p class="eventPriority" style="background-color:rgba(114, 187, 83, 0.425);">Priorité de l'évenement: {{activity.priority}}</p>
+                   Priorité: <p class="eventPriority" style="background-color:rgba(114, 187, 83, 0.425);">{{activity.priority}}</p>
                 {% elseif activity.priorityCode > 10 and activity.priorityCode <= 15  %}
-                    <p class="eventPriority" style="background-color:rgba(170, 64, 64, 0.425);">Priorité de l'évenement: {{activity.priority}}</p>
+                   Priorité: <p class="eventPriority" style="background-color:rgba(170, 64, 64, 0.425);">{{activity.priority}}</p>
                 {% elseif activity.priorityCode == 10 or activity.priorityCode == 9 %}
                     <p class="eventPriority" style="background-color:rgba(170, 163, 64, 0.425);">Priorité de l'évenement: {{activity.priority}}</p>
                 {% else %}
                     <p class="eventPriority" style="background-color:rgba(59, 43, 97, 0.425);">Priorité de l'évenement: {{activity.priority}}</p>
                 {% endif %}
-                <p class="eventName">Nom de l'activité : {{activity.name}}</p>
-                <p class="eventAuthor">Intervenant: {{activity.intervenant}}</p>
-                <p class="eventDescription">Description : {{activity.description}}</p>
-                <p class="eventBegin">L'heure de début : {{activity.beginTime}}</p>
-                <p class="eventEnd">L'heure de fin : {{activity.endTime}}</p>
-                <p class="eventClass">L'emplacement : {{activity.class}}</p>
-                <p class="eventPlaces">Nombre de places au total : {{activity.totalPlaces}}</p>
-                <p class="eventPlacesLeft">Nombre de places restant : {{activity.leftPlaces}}</p>
-                <p class="eventCreator">L'activité crée par: {{activity.creator}}</p>
-
+                L'activité : 
+                <div class="wrapEventDetail">
+                    <p class="eventName grid-single">{{activity.name}}</p>
+                    <span class="grid-single">Intervenant: <p class="eventAuthor">{{activity.intervenant}}</p></span>
+                    <span class="grid-single">Description : <p class="eventDescription">{{activity.description}}</p></span>
+                    <span class="grid-single">L'emplacement : <p class="eventClass">{{activity.class}}</p></span>
+                    <span >L'heure de début : <p class="eventBegin">{{activity.beginTime}}</p></span>
+                    <span class="grid-two">L'heure de fin : <p class="eventEnd">{{activity.endTime}}</p></span>
+                    <span >Nombre de places au total : <p class="eventPlaces">{{activity.totalPlaces}}</p></span>
+                    <span >Nombre de places restant : <p class="eventPlacesLeft">{{activity.leftPlaces}}/{{activity.totalPlaces}}</p></span>
+                    <span class="grid-single">L'activité crée par: <p class="eventCreator">{{activity.creator}}</p></span>
+                </div>
                 {% if activity.isMaster == true %}
-                    <h5>C'est une activité parent. Les autres activités sont liées à cette activité:</h5>
-                    <p class="eventName">Nom de l'activité : {{activity.nameLinked}}</p>
-                    <p class="eventBegin">L'heure de début : {{activity.beginTimeLinked}}</p>
-                    <p class="eventEnd">L'heure de fin : {{activity.endTimeLinked}}</p>
-
+                    <h5>C'est une activité parent. Les autres activités sont liées à cette activité :</h5>
+                    {% if activity.mergesAsMaster == null %}
+                         <p class="info">Aucune activité liée</p>
+                    {% else %}
+                        {% for child in activity.mergesAsMaster %}
+                            <div class="event-child">
+                                <p class="eventBegin-child">L'heure de début de la séquence: {{child.beginTime}}</p>
+                                <p class="eventEnd-child">L'heure de fin de la séquence: {{child.endTime}}</p>
+                            </div>
+                        {% endfor %}
+                    {% endif %} 
                 {% else %}
-                    <p class="eventName">L'activité est unique</p>
+                    {% if activity.mergeAsChild == null %}
+                        <p class="eventName">L'activité est unique</p>
+                    {% else %}
+                        <p>C'est une activité enfant. Elle a une activité parent : </p>
+                        <div class="event-parent">
+                            <p class="eventBegin-parent">L'heure de début de la séquence: {{activity.mergeAsChild.beginTime}}</p>
+                            <p class="eventEnd-parent">L'heure de fin de la séquence: {{activity.mergeAsChild.endTime}}</p>
+                            <a class="dayDetailBtn sitebtn" href={{ path('activityDetail', { idActivity: activity.mergeAsChild.id })}}>Consulter</a>
+                        </div>
+                    {% endif %}
                 {% endif %} 
 
-                {% if activity.idLinked != "" %}
-                    <h5>Activité lié :</h5>
-                    <p class="eventName">Nom de l'activité : {{activity.nameLinked}}</p>
-                    <p class="eventBegin">L'heure de début : {{activity.beginTimeLinked}}</p>
-                    <p class="eventEnd">L'heure de fin : {{activity.endTimeLinked}}</p>
-
-                {% else %}
-                    <p class="eventName">L'activité est unique</p>
-                {% endif %} 
-                
                 <a class="removeBtn sitebtn" href={{ path('removeEvent', { idActivity: activity.idActivity })}}>Supprimer</a>
                 <a class="modifyBtn sitebtn" href={{ path('eventModify', { idActivity: activity.idActivity })}}>Modifier</a>
-            
+
             </div>
             <div class="dayGrid">
 

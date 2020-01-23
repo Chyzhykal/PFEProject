@@ -42,7 +42,6 @@
 }
 
 .dayDetail{
-    width:80%;   
     color:#fefefe;
 }
 
@@ -82,4 +81,74 @@
     margin:5px;
     -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.64);
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.64);
+}
+
+.eventPriority{
+    text-shadow: 1px 1px 1px rgb(53, 53, 53);
+    padding:5px;
+    margin:5px;
+    width:40%;   
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.wrapEventDetail{
+    background-color: rgba(50, 122, 28, 0.534);
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.64);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.64);
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding-left: 20px;
+}
+
+.grid-single{
+    grid-column: 1 / span 3;
+}
+
+.grid-two{
+    grid-column: 2 / span 2;
+}
+.eventName{
+    grid-row: 1;
+    text-shadow: 2px 2px 2px rgb(53, 53, 53);
+    font-size: 23px; 
+    text-align: center;
+}
+
+.eventDescription{
+    margin-left:10px;
+    background-color: rgba(8, 20, 61W, 0.123);
+    border-radius: 3px;
+    font-style:italic;
+    padding:10px;
+    font-size: 14px;
+}
+
+.eventClass, .eventAuthor, .eventCreator, .eventBegin, .eventEnd, .eventPlaces, .eventPlacesLeft{
+    display: inline-block;
+    font-size: 18px;
+    color: rgb(188, 173, 255);
+}
+
+.eventAuthor{
+    font-style: oblique;
+}
+
+.eventCreator{
+    color: rgb(188, 173, 255);
+}
+
+.event-child{
+    background-color: rgba(170, 163, 64, 0.425);
+    padding-left: 10px;
+    padding-top: 10px;
+    margin:10px;
+    border:1px solid white;
+}
+
+.dayGrid{
+    display: grid;
 }

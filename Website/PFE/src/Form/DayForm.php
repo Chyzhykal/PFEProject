@@ -21,8 +21,7 @@ class DayForm extends AbstractType
             ->add('dayname', TextType::class)
             ->add('daydescription', TextareaType::class, ['required'=>false])
             ->add('daydate', DateType::class, array('invalid_message' => 'La date n\'est pas valide', 
-            'widget' => 'choice',
-            'years' => range(date('Y'), date('Y')+100),
+            'widget' => 'single_text',
             ))
             ->add('dayBegintime', TimeType::class, ['invalid_message' => 'L\'heure n\'est pas valide',
             'minutes' => range(0, 59, 15),

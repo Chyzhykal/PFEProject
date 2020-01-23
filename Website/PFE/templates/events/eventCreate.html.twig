@@ -66,18 +66,11 @@
                 </div>
                 <div class="formErrors">
                     {{ form_errors(form.endTime) }}
-                </div> 
-                 <div class="checkBxContainer validate-input" data-validate="C'est un champ obligatoire">
-                    <span class="label-baseInput label-input100">Cette activité est lié à une autre activité</span>
-                    {{ form_widget(form.eventRelated, { 'attr': {'class': 'baseInput checkBx relateEvent'} }) }}
                 </div>
-                <div class="formErrors">
-                    {{ form_errors(form.eventRelated) }}
-                </div>  
                 <div class="baseSubmit">
                     {{ form_widget(form.submit, { 'attr': {'class': 'baseFormButton sitebtn relateChangeBtn'} }) }}
                 </div>
-                  
+                <a class="backBtn sitebtn" href={{ path('selectevent', { idDay: idDay })}}>Retour</a>  
             {{ form_end(form) }}
         <ul class="formErrors">
             {% for error in errors %}

@@ -26,7 +26,7 @@
                         
                 <div class="baseDate validate-input" data-validate="C'est un champ obligatoire">
                     <span class="label-baseInput label-input100">La date de la journée</span>
-                    {{ form_widget(form.daydate, { 'attr': {'class': 'baseInput'} }) }}
+                    {{ form_widget(form.daydate, { 'attr': {'class': 'baseInput textInput'} }) }}
                 </div>
                 <div class="formErrors">
                     {{ form_errors(form.daydate) }}
@@ -41,7 +41,7 @@
                 </div>  
                 <div class="baseTime validate-input" data-validate="C'est un champ obligatoire">
                     <span class="label-baseInput label-input100">L'heure de fin</span>
-                    {{ form_widget(form.dayEndtime, { 'attr': {'class': 'baseInput'} }) }}
+                    {{ form_widget(form.dayEndtime, { 'attr': {'class': 'baseInput '} }) }}
                 </div>
                 <div class="formErrors">
                     {{ form_errors(form.dayEndtime) }}

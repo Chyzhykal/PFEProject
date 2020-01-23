@@ -14,6 +14,8 @@ use App\Entity\TDay;
 use App\Form\DayForm;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\TEvent;
+use Symfony\Component\Validator\Constraints\DateTime;
+use App\EntityHelpers\EventHelper;
 
 class DayController extends AbstractController
 {
@@ -36,30 +38,11 @@ class DayController extends AbstractController
      */
     public function index()
     {
+        $this->updateDays();
         //Getting days from repository by date and time
-        $repository = $this->getDoctrine()->getRepository(TDay::class);
-        $foundDays = $repository->findBy(array('daydeleted'=>false), array('daydate' => 'ASC', 'daybegintime'=>'ASC'));
-
-        //If any day which must repeat each year has date less than today - 
+        $entityManager = $this->getDoctrine()->getManager();
+        $foundDays =$entityManager->getRepository(TDay::class)->findBy(array('daydeleted'=>false), array('daydate' => 'ASC', 'daybegintime'=>'ASC'));
         $date = new \DateTime();
-        for($i=0;$i<count($foundDays); $i++){
-            if($foundDays[$i]->getDaydate()<$date && $foundDays[$i]->getDayrepeat()==true){
-                $entityManager = $this->getDoctrine()->getManager();
-                $foundDay = $entityManager->getRepository(TDay::class)->find($foundDays[$i]->getIdday());
-                $date= $foundDays[$i]->getDaydate();
-                $date->modify('+1 year');
-                $foundDay->setDaydate($date);
-                $foundDays[$i]=$foundDay;
-                $entityManager->flush();
-            }
-            elseif($foundDays[$i]->getDaydate()<$date && $foundDays[$i]->getDayrepeat()==false){
-                $entityManager = $this->getDoctrine()->getManager();
-                $foundDay = $entityManager->getRepository(TDay::class)->find($foundDays[$i]->getIdday());
-                $foundDay->setDaydeleted(true);
-                $foundDays[$i]=$foundDay;
-                $entityManager->flush();
-            }
-        }
 
         $days=array();
         foreach($foundDays as $day){
@@ -76,6 +59,37 @@ class DayController extends AbstractController
                 'days'=> $days,
                 'errors'=>array()
             ]); 
+    }
+
+    private function updateDays(){
+        //Getting days from repository by date and time
+        $entityManager = $this->getDoctrine()->getManager();
+        $foundDays =$entityManager->getRepository(TDay::class)->findAll();
+        $date = new \DateTime();
+
+        for($i=0;$i<count($foundDays); $i++){
+            //If any day which must repeat each year has date less than today - 
+            if($foundDays[$i]->getDaydate()<$date && $foundDays[$i]->getDayrepeat()==true){
+                $entityManager = $this->getDoctrine()->getManager();
+                $foundDay = $entityManager->getRepository(TDay::class)->find($foundDays[$i]->getIdday());
+                // This is made because symfony doesn't understand that even if object ID is the same, date inside it will be different
+                // So i need to make 2 objects
+                $dateInit = $foundDay->getDaydate()->add(date_interval_create_from_date_string('1 year'));
+                while($dateInit<$date){
+                    $dateInit->add(date_interval_create_from_date_string('1 year'));
+                }
+                $newDateStr = $dateInit->format('d/m/Y:H:i:s');
+                $newDate = date_create_from_format('d/m/Y:H:i:s', $newDateStr);
+                $foundDay->setDaydate($newDate);
+                $entityManager->flush();
+            }
+            elseif($foundDays[$i]->getDaydate()<$date && $foundDays[$i]->getDayrepeat()==false){
+                $entityManager = $this->getDoctrine()->getManager();
+                $foundDay = $entityManager->getRepository(TDay::class)->find($foundDays[$i]->getIdday());
+                $foundDay->setDaydeleted(true);
+                $entityManager->flush();
+            }
+        }
     }
 
     /**
@@ -166,7 +180,7 @@ class DayController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(TDay::class);
         $day = $repository->findOneBy(['idday'=>$idDay]);
         $name=$day->getDayname();
-        $date=$day->getDaydate()->format('Y/m/d');
+        $date=$day->getDaydate()->format('d/m/Y');
         $beginTime=$day->getDaybegintime()->format('H\hi');
         $endTime=$day->getDayendtime()->format('H\hi');
         $description=$day->getDaydescription();
@@ -175,12 +189,65 @@ class DayController extends AbstractController
         $foundDay=array('idDay'=>$idDay, 'description'=>$description, 'repeat'=>$repeat, 'name'=>$name, 'date'=>$date, 'beginTime'=>$beginTime, 'endTime'=>$endTime);
 
         $repository = $this->getDoctrine()->getRepository(TEvent::class);
-        $events = $repository->findBy(['fkday'=>$idDay]);
+        $eventEntities = $repository->findBy(['fkday'=>$idDay]);
 
-        $this->session->set('idDay', $idDay);
+        $events=array();
+        $timeTableBegin=array();
+        $timeTableEnd=array();
+        foreach($eventEntities as $event){
+
+            $convertedEvent = EventHelper::make_entity_transition_as_single($event);
+            array_push($events, $convertedEvent);
+
+            if(!in_array($convertedEvent['beginTime'], $timeTableBegin)){
+                $timeTableBegin[$convertedEvent['beginTime']]=1;
+            }
+            else{
+                $timeTableBegin[$convertedEvent['beginTime']]+=1;
+            }
+            if(!in_array($convertedEvent['endTime'], $timeTableEnd)){
+                $timeTableEnd[$convertedEvent['endTime']]=1;
+            }
+            else{
+                $timeTableEnd[$convertedEvent['endTime']]+=1;
+            }
+        }
+
+        $maxLineAmount=(strtotime($day->getDayendtime()->format('H:i:00')) - strtotime($day->getDaybegintime()->format('H:i:00')))/900+1;
+       
+        $colAmount=0;
+        $maxColAmount=$colAmount;
+
+        for($i=0; $i<$maxLineAmount; $i++){
+            $tmpTime=date("H\hi", strtotime($day->getDaybegintime()->format('H:i:00')) + $i*900);
+            if(array_key_exists($tmpTime,$timeTableBegin)){
+                $colAmount+=$timeTableBegin[$tmpTime];
+            }
+            if(array_key_exists(date("H\hi", strtotime($day->getDaybegintime()->format('H:i:00')) + $i*900),$timeTableEnd)){
+                $colAmount-=$timeTableEnd[$tmpTime];
+            }
+            if($colAmount>$maxColAmount){
+                $maxColAmount=$colAmount;
+            }
+        }
+        
+        $timeTable=$timeTableBegin;
+        foreach($timeTableEnd as $keyEnd=>$valueEnd){
+            if(!array_key_exists($keyEnd, $timeTable)){
+                $timeTable[$keyEnd]=$valueEnd;
+            }
+        }
+        $gridAutoStyle=str_repeat("auto ", $maxColAmount+2);
+        //$this->session->set('idDay', $idDay);
 
         return $this->render('days/dayDetail.html.twig', [
             'day'=>$foundDay,
+            'timeTableEnd'=>$timeTableEnd,
+            'timeTableBegin'=>$timeTableBegin,
+            'timeTable'=>$timeTable,
+            'events'=>$events,
+            'maxColAmount'=>$maxColAmount,
+            'gridAutoStyle'=>$gridAutoStyle
         ]);
     }
 
@@ -191,6 +258,7 @@ class DayController extends AbstractController
      */
     public function modifyDay(int $idDay, Request $request) 
     {
+        //TODO : remove expired days and add repeating days
         $errors=array();
         if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
             return $this->redirectToRoute('index');     

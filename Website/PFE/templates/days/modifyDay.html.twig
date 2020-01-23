@@ -26,7 +26,7 @@
                         
                 <div class="baseDate validate-input" data-validate="C'est un champ obligatoire">
                     <span class="label-baseInput label-input100">La date de la journée</span>
-                    {{ form_widget(form.daydate, { 'attr': {'class': 'baseInput'} }) }}
+                    {{ form_widget(form.daydate, { 'attr': {'class': 'baseInput textInput'} }) }}
                 </div>
                 <div class="formErrors">
                     {{ form_errors(form.daydate) }}
@@ -57,7 +57,7 @@
                 <div class="baseSubmit">
                     {{ form_widget(form.submit, { 'attr': {'class': 'baseFormButton sitebtn'} }) }}
                 </div>
-                 <a class="backBtn" href={{ path('dayDetail', { idDay: idDay })}}>Retour</a>  
+                <a class="backBtn" href={{ path('dayDetail', { idDay: idDay })}}>Retour</a>  
             {{ form_end(form) }}
         <ul class="formErrors">
             {% for error in errors %}

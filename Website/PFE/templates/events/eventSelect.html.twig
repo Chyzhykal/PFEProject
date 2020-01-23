@@ -1,0 +1,18 @@
+{% extends 'layout/layoutAdmin.html.twig' %}
+{% block body %}
+<div class="limiter">
+    <div class="wrapLimiter">
+        <div class="wrapAdminHome p-b-160 p-t-50">
+            <ul class="adminMenu">
+                <li class="adminButton1 ableft" ><a class="wrap-adminButton1" href={{ path('newevent', { idDay: idDay })}}>Ajouter une activité</a></li>
+                {% if hasParents %}
+                    <li class="adminButton1 abright"><a class="wrap-adminButton1" href={{ path('neweventNext', { idDay: idDay })}}>Ajouter la suite d'une activité</a></li>
+                {% else %}
+                    <p class="info">Le jour n'a pas d'activités</p>
+                {% endif %}
+            </ul>
+        </div>
+        <a class="backBtn sitebtn" href={{ path('dayDetail', { idDay: idDay })}}>Retour</a>  
+    </div>
+</div>
+{% endblock %}

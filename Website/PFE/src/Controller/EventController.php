@@ -17,6 +17,7 @@ use App\tempEntity\DayEvents;
 use App\Form\EventNextForm;
 use \Doctrine\Common\Collections\Criteria;
 use App\Entity\TEventMerge;
+use App\EntityHelpers\EventHelper;
 
 class EventController extends AbstractController
 {
@@ -47,51 +48,27 @@ class EventController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(TEvent::class);
         $activity = $repository->findOneBy(['idevent'=>$idActivity]);
 
-        $name=$activity->getEvename();
-        $priority=$activity->getFkpriority()->getEvepriname();
-        $priorityCode=$activity->getFkpriority()->getEvepricode();
-        $intervenant=$activity->getEveauthor();
-        $class=$activity->getEveclass();
-        $totalPlaces=$activity->getEvetotplacenum();
-        $leftPlaces=$activity->getEveplaceleft();
-        $description=$activity->getEvedescription();
-        $beginTime=$activity->getEvebegintime()->format('H\hi');
-        $endTime=$activity->getEveendtime()->format('H\hi');
-        $dayName=$activity->getFkday()->getDayname();
-        $idDay=$activity->getFkday()->getIdday();
-        $creator=$activity->getFkuser()->getUselogin();
-        $isMaster=$activity->getIsmaster();
+        $foundActivity= EventHelper::make_entity_transition_as_single($activity);
         
         $repository = $this->getDoctrine()->getRepository(TEventMerge::class);
         $merges=null;
         $merge=null;
-        if($isMaster){
-            $merges = $repository->findBy(['fkeventmaster'=>$activity]);
+        if(foundActivity['isMaster']){
+            $merges=array();
+            $children = $repository->findBy(['fkeventmaster'=>$activity]);
+            foreach($children as $child){
+                array_push($merges, array('beginTime'=> $child->getFkeventchild()->getEvebegintime()->format('H\hi'), 'endTime'=>$child->getFkeventchild()->getEveendtime()->format('H\hi')));
+            }
         }
         else{
-            $merge = $repository->findBy(['fkeventchild'=>$activity]);
-            $merges = $repository->findBy(['fkeventmaster'=>$merge->getFkeventmaster()]);
+            $parent = $repository->findOneBy(['fkeventchild'=>$activity]);
+            $merge['id']=$parent->getFkeventmaster()->getIdevent();
+            $merge['beginTime']=$parent->getFkeventmaster()->getEvebegintime()->format('H\hi');
+            $merge['endTime']=$parent->getFkeventmaster()->getEveendtime()->format('H\hi');
         }
-        $foundActivity=array(
-            'priorityCode'=>$priorityCode,
-            'idDay'=>$idDay,
-            'idActivity'=>$idActivity,
-            'name'=>$name,
-            'priority'=>$priority,
-            'intervenant'=>$intervenant,
-            'class'=>$class,
-            'totalPlaces'=>$totalPlaces,
-            'leftPlaces'=>$leftPlaces,
-            'description'=>$description,
-            'beginTime'=>$beginTime,
-            'endTime'=>$endTime,
-            'dayName'=>$dayName,
-            'creator'=>$creator,
-            'mergesMaster'=>$merges,
-            'mergeChild'=>$merge,
-            'isMaster'=>$isMaster
-        );
-
+        
+        $foundActivity['mergesAsMaster']=$merges;
+        $foundActivity['mergeAsChild']=$merge;
 
         return $this->render('events/eventDetail.html.twig', [
             'activity'=>$foundActivity,
@@ -99,18 +76,52 @@ class EventController extends AbstractController
     }
 
     /**
-    * @Route("/new-event", name="newevent")
+    * @Route("/select-event/{idDay}", methods={"GET","POST"}, name="selectevent")
+    * @param int $idDay
     */
-    public function addEvent(Request $request)
+    public function selectEvent(int $idDay)
     {
         if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
             return $this->redirectToRoute('index');     
         }   
 
+        $repository = $this->getDoctrine()->getRepository(TDay::class);
+        $day = $repository->findOneBy(['idday'=> $idDay]);
+        $repository = $this->getDoctrine()->getRepository(TEvent::class);
+        // Add a not equals parameter to your criteria
+        $criteria = Criteria::create()
+        ->andWhere(Criteria::expr()->eq('fkday', $day))
+        ->andWhere(Criteria::expr()->eq('ismaster', true));
+        // Find all from the repository matching your criteria
+        $activities=$repository->matching($criteria);
+        $hasParents=true;
+        if($activities[0]==null){
+            $hasParents=false;
+        }
+        return $this->render('events/eventSelect.html.twig', [
+            'idDay'=>$idDay,
+            'hasParents'=>$hasParents
+        ]);
+    }
+
+    /**
+    * @Route("/new-event/{idDay}", methods={"GET","POST"}, name="newevent")
+    * @param int $idDay
+    */
+    public function addEvent(Request $request, int $idDay)
+    {
+        if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
+            return $this->redirectToRoute('index');     
+        }  
         $errors=array();
 
+        $repository = $this->getDoctrine()->getRepository(TDay::class);
+        $day = $repository->findOneBy(['idday'=> $idDay]);
         $activity = new TempEvent();
-        $form = $this->createForm(EventForm::class, $activity);
+        $form = $this->createForm(EventForm::class, $activity, [
+            'limitBeginH' => $day->getDaybegintime()->format('H'),
+            'limitEndH' => $day->getDayendtime()->format('H'),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -118,14 +129,10 @@ class EventController extends AbstractController
             $activity = $form->getData(); 
             
             $event= new TEvent();
-            
-            $repository = $this->getDoctrine()->getRepository(TDay::class);
-            $day = $repository->findOneBy(['idday'=>$this->session->get('idDay')]);
 
             $repository = $this->getDoctrine()->getRepository(TUser::class);
             $user = $repository->findOneBy(['iduser'=> $this->session->get("iduser")]);
             
-
             $event->setFkday($day);
             $event->setFkpriority($activity->getPriority());
             $event->setEvename($activity->getName());
@@ -137,44 +144,45 @@ class EventController extends AbstractController
             $event->setEvebegintime($activity->getBeginTime());
             $event->setEveendtime($activity->getEndTime());
             $event->setFkuser($user);
+            $event->setIsmaster(true);
 
             $entityManager = $this->getDoctrine()->getManager();
-            $event->setIsmaster(!getEventRelated());
             $entityManager->persist($event);
             $entityManager->flush();
             $idActivity = $event->getIdevent();
-
-            if($activity->getEventRelated()==true){
-                return $this->redirectToRoute('neweventNext',['idActivity' => $idActivity]);
-            }
 
             return $this->redirectToRoute('activityDetail',['idActivity' => $idActivity]);
         }
             
         return $this->render('events/eventCreate.html.twig', [
+            'idDay'=>$idDay,
             'form' => $form->createView(),
             'errors'=>$errors,
         ]);
     }
 
     /**
-    * Next step of event creation - only whem event must be related to another event
-    * @Route("/new-event-next/{idActivity}", methods={"GET", "POST"}, name="neweventNext")
-    * @param int $idActivity
+    * Event creation - only when event must be related to another event
+    * @Route("/new-event-next/{idDay}", methods={"GET","POST"}, name="neweventNext")
+    * @param int $idDay
     */
-    public function addEventNext(Request $request, int $idActivity)
+    public function addEventNext(Request $request, int $idDay)
     {
+        //TODO : add name for child activity
         if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
             return $this->redirectToRoute('index');     
         }   
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $activityChild = $entityManager->getRepository(TEvent::class)->find($idActivity);
+        $repository = $this->getDoctrine()->getRepository(TDay::class);
+        $day = $repository->findOneBy(['idday'=> $idDay]);
+
+        $repository = $this->getDoctrine()->getRepository(TUser::class);
+        $user = $repository->findOneBy(['iduser'=> $this->session->get("iduser")]);
 
         $repository = $this->getDoctrine()->getRepository(TEvent::class);
         // Add a not equals parameter to your criteria
         $criteria = Criteria::create()
-        ->andWhere(Criteria::expr()->eq('fkday', $activityChild->getFkday()))
+        ->andWhere(Criteria::expr()->eq('fkday', $day))
         ->andWhere(Criteria::expr()->eq('ismaster', true));
         // Find all from the repository matching your criteria
 
@@ -185,18 +193,36 @@ class EventController extends AbstractController
         $tempEntity = new TempEventNext();
         $form = $this->createForm(EventNextForm::class, $tempEntity, [
             'events' => $dayEvents,
+            'limitBeginH' => $day->getDaybegintime()->format('H'),
+            'limitEndH' => $day->getDayendtime()->format('H'),
         ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $formData = $form->getData(); 
-
-            $activityChild->setIsmerged($formData->getEventSuite());
-            $entityManager->flush();
-
             $activityMaster=$formData->getRelatedEvent();
 
+            $entityManager = $this->getDoctrine()->getManager();
+            $activityChild = new TEvent();
+            $activityChild->setIsmerged(true);
+            $activityChild->setFkday($day);
+            $activityChild->setFkpriority($activityMaster->getFkpriority());
+            $activityChild->setEvename($activityMaster->getEvename());
+            $activityChild->setEveauthor($activityMaster->getEveauthor());
+            $activityChild->setEveclass($activityMaster->getEveclass());
+            $activityChild->setEvetotplacenum($activityMaster->getEvetotplacenum());
+            $activityChild->setEveplaceleft($activityMaster->getEveplaceleft());
+            $activityChild->setEvedescription($activityMaster->getEvedescription());
+            $activityChild->setEvebegintime($formData->getBeginTime());
+            $activityChild->setEveendtime($formData->getEndTime());
+            $activityChild->setFkuser($user);
+            $activityChild->setIsmaster(false);
+            $entityManager->persist($activityChild);
+            $entityManager->flush();
+
+            $idActivity = $activityChild->getIdevent();
+            
             $entityManager = $this->getDoctrine()->getManager();
             $merge = new TEventMerge();
             $merge->setFkeventmaster($activityMaster);
@@ -208,6 +234,7 @@ class EventController extends AbstractController
         }
             
         return $this->render('events/create-next.html.twig', [
+            'idDay'=>$idDay,
             'form' => $form->createView(),
             'errors'=>array(),
         ]);

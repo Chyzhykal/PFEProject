@@ -108,3 +108,10 @@ body{
     color: #fefefe;
     transition-duration: 0.3s;
 }
+
+.info{
+    color:white;
+    display: block;
+    margin:5px;
+    width:200px;
+}

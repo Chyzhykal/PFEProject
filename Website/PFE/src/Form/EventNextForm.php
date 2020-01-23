@@ -28,15 +28,34 @@ class EventNextForm extends AbstractType
                 'choice_label' => 'evename',
                 'choices' => $options['events']->getEvents(),
             ])
-            ->add('eventSuite', CheckboxType::class, ['required'=>false])
+            ->add('beginTime', TimeType::class, [
+                'invalid_message' => 'Le temps n\'est pas valide',
+                'placeholder' => [
+                    'hour' => 'Heure', 'minute' => 'Minute'
+                ],
+                'minutes' => range(0,59, 15),
+                'hours' => range($options['limitBeginH'],$options['limitEndH']),
+            ])
+            ->add('endTime', TimeType::class, [
+                'invalid_message' => 'Le temps n\'est pas valide',
+                'placeholder' => [
+                    'hour' => 'Heure', 'minute' => 'Minute'
+                ],
+                'minutes' => range(0,59, 15),
+                'hours' => range($options['limitBeginH'],$options['limitEndH']),
+            ])
             ->add('submit', SubmitType::class, ['label' => 'Créer']);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'events' =>new DayEvents()
+            'events' =>new DayEvents(),
+            'limitBeginH' => "0",
+            'limitEndH' => "0",
         ]);
         $resolver->setAllowedTypes('events', 'App\tempEntity\DayEvents');
+        $resolver->setAllowedTypes('limitBeginH', 'string');
+        $resolver->setAllowedTypes('limitEndH', 'string');
     }
 }

@@ -65,24 +65,6 @@ class TempEvent
      */
     private $endTime;
 
-    /**
-     * @var bool
-     *
-     */
-    private $eventRelated;
-
-    public function getEventRelated(): ?bool
-    {
-        return $this->eventRelated;
-    }
-
-    public function setEventRelated(bool $eventRelated): self
-    {
-        $this->eventRelated = $eventRelated;
-        
-        return $this;
-    }
-
     public function getName(): ?string
     {
         return $this->name;
@@ -175,42 +157,6 @@ class TempEvent
     public function setEndTime(\DateTime $endTime): self
     {
         $this->endTime = $endTime;
-
-        return $this;
-    }
-
-    public function getFkday(): ?TDay
-    {
-        return $this->fkday;
-    }
-
-    public function setFkday(?TDay $fkday): self
-    {
-        $this->fkday = $fkday;
-
-        return $this;
-    }
-
-    public function getFklinkedevent(): ?TEvent
-    {
-        return $this->fklinkedevent;
-    }
-
-    public function setFklinkedevent(?self $fklinkedevent): self
-    {
-        $this->fklinkedevent = $fklinkedevent;
-
-        return $this;
-    }
-
-    public function getCreator(): ?TUser
-    {
-        return $this->creator;
-    }
-
-    public function setCreator(?TUser $creator): self
-    {
-        $this->creator = $creator;
 
         return $this;
     }
