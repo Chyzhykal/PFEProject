@@ -3,7 +3,7 @@
  * ETML
  * Author : Chyzhyk Aleh
  * Date : 16.01.2020
- * Description : 
+ * Description : Converts events into array
  */
 namespace App\EntityHelpers;
 
@@ -17,7 +17,7 @@ class EventHelper
 {
 
     /**
-     * 
+     * array of events convertion
      */
     public static function make_entity_transition_as_array($events)
     {
@@ -63,7 +63,7 @@ class EventHelper
     }
 
      /**
-     * 
+     * Single event convertion
      */
     public static function make_entity_transition_as_single($event)
     {
@@ -86,7 +86,7 @@ class EventHelper
         
 
         $convertedEvent= array(
-            'idEvent'=>$idEvent ,
+            'idActivity'=>$idEvent ,
             'intervenant'=>$intervenant ,
             'name'=>$name ,
             'class'=>$class ,

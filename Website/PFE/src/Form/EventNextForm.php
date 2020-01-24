@@ -1,4 +1,10 @@
 <?php
+/**
+ * ETML
+ * Author : Chyzhyk Aleh
+ * Date : 16.01.2020
+ * Description : Form for child event creation and modification
+ */
 // src/Form/Event.php
 namespace App\Form;
 
@@ -33,7 +39,7 @@ class EventNextForm extends AbstractType
                 'placeholder' => [
                     'hour' => 'Heure', 'minute' => 'Minute'
                 ],
-                'minutes' => range(0,59, 15),
+                'minutes' => range(0,59,15),
                 'hours' => range($options['limitBeginH'],$options['limitEndH']),
             ])
             ->add('endTime', TimeType::class, [

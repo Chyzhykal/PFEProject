@@ -1,4 +1,10 @@
 <?php
+/**
+ * ETML
+ * Author : Chyzhyk Aleh
+ * Date : 16.01.2020
+ * Description : Form for master event creation and modification
+ */
 // src/Form/Event.php
 namespace App\Form;
 

@@ -21,24 +21,27 @@
                 <a class="modifyBtn sitebtn" href={{ path('dayModify', { idDay: day.idDay })}}>Modifier</a>
                 <a class="addEventBtn sitebtn" href={{ path('selectevent', { idDay: day.idDay })}}>Ajouter une activité</a>
             </div>
-            <div class="dayGrid" style="grid-template-columns:{{gridAutoStyle}};">
-                
-                {% for time in timeTable %}
-                    {% for event in events %}
-                      {% if event.beginTime == time.key %}
-                        <div class="eventBlock">
-                            {% if day.repeat == true %}
-                                <img src={{asset('images/repeat.png')}} class="repeatIcon"/>
-                            {% else %}
-                                <img src={{asset('images/one.png')}} class="repeatIcon"/>
+            <div class="dayGrid" style="grid-template-columns:100px {{gridAutoStyle}};">
+                {% for timeLine in globalTable %}
+                    <div class="timeColumn">
+                        {% if timeLine in usedTimes %}
+                            <p class="timeValue">{{timeLine}}</p>
+                        {% else %}
+                            <p class="timeValueEmpty"></p>
+                        {% endif %}
+                    </div>
+                    {% set found = false %}
+                    {% for i in 1.. maxColAmount  %}
+                        {% for time, event in timeTableBegin  %}
+                            {% if event.beginTime == timeLine %}
+                                <div class="eventColumn" style="background-color:red; grid-column: {{ event.periodAmount }};">
+                                    <p class="eventValue">{{event.name}}</p>
+                                </div>
+                                {% set found = true %}
                             {% endif %}
-                            <p class="dayName">Nom du jour : {{day.name}}</p>
-                            <p class="dayDate">Date : {{day.date}}</p>
-                            <p class="dayBegin">L'heure de début : {{day.beginTime}}</p>
-                            <p class="dayEnd">L'heure de fin : {{day.endTime}}</p>
-                            <a class="dayDetailBtn sitebtn" href={{ path('dayDetail', { idDay: day.idDay })}}>Afficher les détails</a>
-                        </div>
+                        {% endfor %}
                     {% endfor %}
+
                 {% endfor %}
             </div>
         </div>

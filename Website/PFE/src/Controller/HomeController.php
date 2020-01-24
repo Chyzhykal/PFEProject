@@ -37,6 +37,7 @@ class HomeController extends AbstractController
     }
 
     /**
+    * Home page, login form for participant s
     * @Route("/" , name="index")
     */
     public function Home(Request $request)
@@ -55,6 +56,7 @@ class HomeController extends AbstractController
     }
 
     /**
+    * Calendar page
     * @Route("/calendar", name="calendar")
     */
     public function Calendar(Request $request)
@@ -63,7 +65,9 @@ class HomeController extends AbstractController
            
         ]);
     }
+
     /**
+    * Frequent questions page
     * @Route("/faq", name="faq")
     */
     public function Faq(Request $request)

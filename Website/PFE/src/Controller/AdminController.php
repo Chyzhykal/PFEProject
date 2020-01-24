@@ -3,7 +3,7 @@
  * ETML
  * Author : Chyzhyk Aleh
  * Date : 16.01.2020
- * Description : Administrator controller 
+ * Description : Administrator controller, 
  */
 namespace App\Controller;
 

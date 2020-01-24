@@ -1,3 +1,9 @@
+/**
+ * ETML
+ * Author : Chyzhyk Aleh
+ * Date : 16.01.2020
+ * Description : Script file for temp admin button, used only for style
+ */
 $( document ).ready(function() {
     $( ".adminButton2" ).hover(
         function() {

@@ -6,7 +6,7 @@
                 <span class="baseFormTitle">
                     <h1>Détails de l'activité</h1>
                 </span>
-                <a class="backBtn sitebtn" href={{ path('dayDetail', { idDay: activity.idDay })}}>Journée "{{activity.dayName}}"</a>
+                <a class="backBtn sitebtn" href={{ path('dayDetail', { idDay: activity.idDay })}}>Journée "{{activity.name}}"</a>
 
                 {% if activity.priorityCode < 9 %}
                    Priorité: <p class="eventPriority" style="background-color:rgba(114, 187, 83, 0.425);">{{activity.priority}}</p>
@@ -56,9 +56,6 @@
 
                 <a class="removeBtn sitebtn" href={{ path('removeEvent', { idActivity: activity.idActivity })}}>Supprimer</a>
                 <a class="modifyBtn sitebtn" href={{ path('eventModify', { idActivity: activity.idActivity })}}>Modifier</a>
-
-            </div>
-            <div class="dayGrid">
 
             </div>
         </div>

@@ -1,15 +1,185 @@
-filename, language, CSS, comment, blank, total
-admin\adminMain.css, CSS, 46, 0, 11, 57
-bootstrap\bootstrap-grid.css, CSS, 3511, 7, 201, 3719
-bootstrap\bootstrap-grid.min.css, CSS, 1, 6, 0, 7
-bootstrap\bootstrap-reboot.css, CSS, 267, 8, 56, 331
-bootstrap\bootstrap-reboot.min.css, CSS, 1, 7, 0, 8
-bootstrap\bootstrap.css, CSS, 8832, 7, 1199, 10038
-bootstrap\bootstrap.min.css, CSS, 1, 6, 0, 7
-event\add-forms.css, CSS, 120, 0, 19, 139
-event\agenda.css, CSS, 133, 0, 21, 154
-login.css, CSS, 303, 22, 77, 402
-main.css, CSS, 104, 0, 13, 117
-nav.css, CSS, 88, 0, 16, 104
-util.css, CSS, 2824, 71, 99, 2994
-Total, -, 16231, 134, 1712, 18077
+filename, language, JSON, PHP, YAML, Ignore, CSS, JavaScript, HTML (Twig), Less, XML, SCSS, comment, blank, total
+composer.json, JSON, 82, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 83
+config\bootstrap.php, PHP, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 3, 5, 24
+config\bundles.php, PHP, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 18
+config\packages\cache.yaml, YAML, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 13, 5, 20
+config\packages\dev\debug.yaml, YAML, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 1, 5
+config\packages\dev\easy_log_handler.yaml, YAML, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 11, 2, 17
+config\packages\dev\monolog.yaml, YAML, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 8, 1, 20
+config\packages\dev\swiftmailer.yaml, YAML, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 1, 5
+config\packages\dev\web_profiler.yaml, YAML, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7
+config\packages\doctrine.yaml, YAML, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 5, 3, 27
+config\packages\doctrine_migrations.yaml, YAML, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 1, 6
+config\packages\framework.yaml, YAML, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 6, 3, 19
+config\packages\prod\doctrine.yaml, YAML, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 3, 33
+config\packages\prod\monolog.yaml, YAML, 0, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 1, 24
+config\packages\prod\routing.yaml, YAML, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4
+config\packages\routing.yaml, YAML, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4
+config\packages\security.yaml, YAML, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 10, 4, 30
+config\packages\sensio_framework_extra.yaml, YAML, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4
+config\packages\swiftmailer.yaml, YAML, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4
+config\packages\test\framework.yaml, YAML, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5
+config\packages\test\monolog.yaml, YAML, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 1, 8
+config\packages\test\swiftmailer.yaml, YAML, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3
+config\packages\test\validator.yaml, YAML, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4
+config\packages\test\web_profiler.yaml, YAML, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7
+config\packages\translation.yaml, YAML, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7
+config\packages\twig.yaml, YAML, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5
+config\packages\validator.yaml, YAML, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 2, 9
+config\routes.yaml, YAML, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 4
+config\routes\annotations.yaml, YAML, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4
+config\routes\dev\twig.yaml, YAML, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4
+config\routes\dev\web_profiler.yaml, YAML, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8
+config\services.yaml, YAML, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 11, 6, 28
+public\css\admin\adminMain.css, CSS, 0, 0, 0, 0, 46, 0, 0, 0, 0, 0, 6, 11, 63
+public\css\bootstrap\bootstrap-grid.css, CSS, 0, 0, 0, 0, 3511, 0, 0, 0, 0, 0, 7, 201, 3719
+public\css\bootstrap\bootstrap-grid.min.css, CSS, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 0, 7
+public\css\bootstrap\bootstrap-reboot.css, CSS, 0, 0, 0, 0, 267, 0, 0, 0, 0, 0, 8, 56, 331
+public\css\bootstrap\bootstrap-reboot.min.css, CSS, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 7, 0, 8
+public\css\bootstrap\bootstrap.css, CSS, 0, 0, 0, 0, 8832, 0, 0, 0, 0, 0, 7, 1199, 10038
+public\css\bootstrap\bootstrap.min.css, CSS, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 0, 7
+public\css\event\add-forms.css, CSS, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 6, 19, 145
+public\css\event\agenda.css, CSS, 0, 0, 0, 0, 133, 0, 0, 0, 0, 0, 6, 22, 161
+public\css\login.css, CSS, 0, 0, 0, 0, 303, 0, 0, 0, 0, 0, 28, 77, 408
+public\css\main.css, CSS, 0, 0, 0, 0, 104, 0, 0, 0, 0, 0, 6, 14, 124
+public\css\nav.css, CSS, 0, 0, 0, 0, 88, 0, 0, 0, 0, 0, 6, 16, 110
+public\css\util.css, CSS, 0, 0, 0, 0, 2824, 0, 0, 0, 0, 0, 77, 99, 3000
+public\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.svg, XML, 0, 0, 0, 0, 0, 0, 0, 0, 199, 0, 0, 0, 199
+public\fonts\Linearicons-Free-v1.0.0\icon-font.min.css, CSS, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 0, 7
+public\fonts\font-awesome-4.7.0\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.svg, XML, 0, 0, 0, 0, 0, 0, 0, 0, 199, 0, 0, 0, 199
+public\fonts\font-awesome-4.7.0\Linearicons-Free-v1.0.0\icon-font.min.css, CSS, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 0, 7
+public\fonts\font-awesome-4.7.0\css\font-awesome.css, CSS, 0, 0, 0, 0, 2327, 0, 0, 0, 0, 0, 10, 1, 2338
+public\fonts\font-awesome-4.7.0\css\font-awesome.min.css, CSS, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 1, 5
+public\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg, XML, 0, 0, 0, 0, 0, 0, 0, 0, 2671, 0, 0, 1, 2672
+public\fonts\font-awesome-4.7.0\less\animated.less, Less, 0, 0, 0, 0, 0, 0, 0, 28, 0, 0, 2, 5, 35
+public\fonts\font-awesome-4.7.0\less\bordered-pulled.less, Less, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 3, 6, 26
+public\fonts\font-awesome-4.7.0\less\core.less, Less, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 2, 3, 13
+public\fonts\font-awesome-4.7.0\less\fixed-width.less, Less, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 2, 1, 7
+public\fonts\font-awesome-4.7.0\less\font-awesome.less, Less, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 4, 2, 19
+public\fonts\font-awesome-4.7.0\less\icons.less, Less, 0, 0, 0, 0, 0, 0, 0, 786, 0, 0, 2, 2, 790
+public\fonts\font-awesome-4.7.0\less\larger.less, Less, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 3, 2, 14
+public\fonts\font-awesome-4.7.0\less\list.less, Less, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 2, 2, 20
+public\fonts\font-awesome-4.7.0\less\mixins.less, Less, 0, 0, 0, 0, 0, 0, 0, 41, 0, 0, 10, 10, 61
+public\fonts\font-awesome-4.7.0\less\path.less, Less, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 3, 2, 16
+public\fonts\font-awesome-4.7.0\less\rotated-flipped.less, Less, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 4, 5, 21
+public\fonts\font-awesome-4.7.0\less\screen-reader.less, Less, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 6
+public\fonts\font-awesome-4.7.0\less\stacked.less, Less, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 2, 2, 21
+public\fonts\font-awesome-4.7.0\less\variables.less, Less, 0, 0, 0, 0, 0, 0, 0, 794, 0, 0, 3, 4, 801
+public\fonts\font-awesome-4.7.0\scss\_animated.scss, SCSS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 2, 5, 35
+public\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss, SCSS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 3, 6, 26
+public\fonts\font-awesome-4.7.0\scss\_core.scss, SCSS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 2, 3, 13
+public\fonts\font-awesome-4.7.0\scss\_fixed-width.scss, SCSS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2, 1, 7
+public\fonts\font-awesome-4.7.0\scss\_icons.scss, SCSS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 786, 2, 2, 790
+public\fonts\font-awesome-4.7.0\scss\_larger.scss, SCSS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 3, 2, 14
+public\fonts\font-awesome-4.7.0\scss\_list.scss, SCSS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 2, 2, 20
+public\fonts\font-awesome-4.7.0\scss\_mixins.scss, SCSS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41, 10, 10, 61
+public\fonts\font-awesome-4.7.0\scss\_path.scss, SCSS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 3, 2, 16
+public\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss, SCSS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 4, 5, 21
+public\fonts\font-awesome-4.7.0\scss\_screen-reader.scss, SCSS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 6
+public\fonts\font-awesome-4.7.0\scss\_stacked.scss, SCSS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 2, 2, 21
+public\fonts\font-awesome-4.7.0\scss\_variables.scss, SCSS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 794, 3, 4, 801
+public\fonts\font-awesome-4.7.0\scss\font-awesome.scss, SCSS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 4, 2, 19
+public\index.php, PHP, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 6, 9, 35
+public\js\adminIndex.js, JavaScript, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 6, 2, 30
+public\js\agendaScripts.js, JavaScript, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 8, 5, 27
+public\js\bootstrap.min.js, JavaScript, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 6, 0, 7
+public\js\jquery-3.4.1.js, JavaScript, 0, 0, 0, 0, 0, 6800, 0, 0, 0, 0, 1810, 1988, 10598
+public\js\main.js, JavaScript, 0, 0, 0, 0, 0, 49, 0, 0, 0, 0, 10, 16, 75
+public\js\rrule.js, JavaScript, 0, 0, 0, 0, 0, 3076, 0, 0, 0, 0, 548, 164, 3788
+public\vindor\animate\animate.css, CSS, 0, 0, 0, 0, 1256, 0, 0, 0, 0, 0, 11, 313, 1580
+public\vindor\animsition\css\animsition.css, CSS, 0, 0, 0, 0, 1700, 0, 0, 0, 0, 0, 11, 247, 1958
+public\vindor\animsition\css\animsition.min.css, CSS, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 0, 7
+public\vindor\animsition\js\animsition.js, JavaScript, 0, 0, 0, 0, 0, 294, 0, 0, 0, 0, 18, 50, 362
+public\vindor\animsition\js\animsition.min.js, JavaScript, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 7, 0, 8
+public\vindor\bootstrap\css\bootstrap-grid.css, CSS, 0, 0, 0, 0, 1277, 0, 0, 0, 0, 0, 1, 75, 1353
+public\vindor\bootstrap\css\bootstrap-grid.min.css, CSS, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 2
+public\vindor\bootstrap\css\bootstrap-reboot.css, CSS, 0, 0, 0, 0, 273, 0, 0, 0, 0, 0, 1, 56, 330
+public\vindor\bootstrap\css\bootstrap-reboot.min.css, CSS, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 2
+public\vindor\bootstrap\css\bootstrap.css, CSS, 0, 0, 0, 0, 7184, 0, 0, 0, 0, 0, 7, 994, 8185
+public\vindor\bootstrap\css\bootstrap.min.css, CSS, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 0, 7
+public\vindor\bootstrap\js\bootstrap.js, JavaScript, 0, 0, 0, 0, 0, 2684, 0, 0, 0, 0, 372, 775, 3831
+public\vindor\bootstrap\js\bootstrap.min.js, JavaScript, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 5, 0, 6
+public\vindor\bootstrap\js\popper.js, JavaScript, 0, 0, 0, 0, 0, 1155, 0, 0, 0, 0, 994, 300, 2449
+public\vindor\bootstrap\js\popper.min.js, JavaScript, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 1, 6
+public\vindor\bootstrap\js\tooltip.js, JavaScript, 0, 0, 0, 0, 0, 283, 0, 0, 0, 0, 165, 92, 540
+public\vindor\countdowntime\countdowntime.js, JavaScript, 0, 0, 0, 0, 0, 37, 0, 0, 0, 0, 0, 8, 45
+public\vindor\css-hamburgers\hamburgers.css, CSS, 0, 0, 0, 0, 481, 0, 0, 0, 0, 0, 85, 61, 627
+public\vindor\css-hamburgers\hamburgers.min.css, CSS, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 0, 7
+public\vindor\daterangepicker\daterangepicker.css, CSS, 0, 0, 0, 0, 266, 0, 0, 0, 0, 0, 1, 3, 270
+public\vindor\daterangepicker\daterangepicker.js, JavaScript, 0, 0, 0, 0, 0, 1194, 0, 0, 0, 0, 129, 306, 1629
+public\vindor\daterangepicker\moment.js, JavaScript, 0, 0, 0, 0, 0, 3063, 0, 0, 0, 0, 318, 659, 4040
+public\vindor\daterangepicker\moment.min.js, JavaScript, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 5, 0, 7
+public\vindor\jquery\jquery-3.2.1.min.js, JavaScript, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 1, 5
+public\vindor\perfect-scrollbar\perfect-scrollbar.css, CSS, 0, 0, 0, 0, 83, 0, 0, 0, 0, 0, 18, 12, 113
+public\vindor\perfect-scrollbar\perfect-scrollbar.min.js, JavaScript, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 5, 0, 6
+public\vindor\select2\select2.css, CSS, 0, 0, 0, 0, 427, 0, 0, 0, 0, 0, 0, 57, 484
+public\vindor\select2\select2.js, JavaScript, 0, 0, 0, 0, 0, 4853, 0, 0, 0, 0, 331, 1266, 6450
+public\vindor\select2\select2.min.css, CSS, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 2
+public\vindor\select2\select2.min.js, JavaScript, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3
+src\Controller\.gitignore, Ignore, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+src\Controller\AdminController.php, PHP, 0, 51, 0, 0, 0, 0, 0, 0, 0, 0, 23, 11, 85
+src\Controller\DayController.php, PHP, 0, 197, 0, 0, 0, 0, 0, 0, 0, 0, 90, 28, 315
+src\Controller\EventController.php, PHP, 0, 194, 0, 0, 0, 0, 0, 0, 0, 0, 37, 38, 269
+src\Controller\HomeController.php, PHP, 0, 41, 0, 0, 0, 0, 0, 0, 0, 0, 23, 11, 75
+src\Controller\LoginController.php, PHP, 0, 66, 0, 0, 0, 0, 0, 0, 0, 0, 27, 18, 111
+src\EntityHelpers\EventHelper.php, PHP, 0, 89, 0, 0, 0, 0, 0, 0, 0, 0, 12, 8, 109
+src\Entity\.gitignore, Ignore, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+src\Entity\TDay.php, PHP, 0, 82, 0, 0, 0, 0, 0, 0, 0, 0, 69, 34, 185
+src\Entity\TEvent.php, PHP, 0, 167, 0, 0, 0, 0, 0, 0, 0, 0, 119, 68, 354
+src\Entity\TEventMerge.php, PHP, 0, 31, 0, 0, 0, 0, 0, 0, 0, 0, 32, 13, 76
+src\Entity\TEventPriority.php, PHP, 0, 31, 0, 0, 0, 0, 0, 0, 0, 0, 15, 14, 60
+src\Entity\TParticipant.php, PHP, 0, 69, 0, 0, 0, 0, 0, 0, 0, 0, 39, 25, 133
+src\Entity\TUser.php, PHP, 0, 72, 0, 0, 0, 0, 0, 0, 0, 0, 53, 32, 157
+src\Form\DayForm.php, PHP, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3, 42
+src\Form\EventForm.php, PHP, 0, 61, 0, 0, 0, 0, 0, 0, 0, 0, 7, 5, 73
+src\Form\EventNextForm.php, PHP, 0, 57, 0, 0, 0, 0, 0, 0, 0, 0, 7, 4, 68
+src\Form\LoginForm.php, PHP, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 7, 5, 30
+src\Form\ParticipantForm.php, PHP, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3, 26
+src\Kernel.php, PHP, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 4, 10, 54
+src\Migrations\.gitignore, Ignore, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+src\Migrations\Version20191219085732.php, PHP, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 5, 9, 44
+src\Migrations\Version20191219091109.php, PHP, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 5, 9, 38
+src\Migrations\Version20191219091302.php, PHP, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 5, 9, 36
+src\Migrations\Version20191219091640.php, PHP, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 5, 9, 36
+src\Migrations\Version20200113071820.php, PHP, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 5, 9, 36
+src\Migrations\Version20200113073352.php, PHP, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 5, 9, 36
+src\Migrations\Version20200115101317.php, PHP, 0, 28, 0, 0, 0, 0, 0, 0, 0, 0, 5, 9, 42
+src\Migrations\Version20200115102355.php, PHP, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 5, 9, 36
+src\Migrations\Version20200115132346.php, PHP, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 5, 9, 38
+src\Migrations\Version20200115135102.php, PHP, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 5, 9, 36
+src\Migrations\Version20200116124651.php, PHP, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 5, 9, 38
+src\Migrations\Version20200116141436.php, PHP, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 5, 9, 44
+src\Migrations\Version20200117073510.php, PHP, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 5, 9, 36
+src\Repository\.gitignore, Ignore, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+src\Repository\DayRepository.php, PHP, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 33, 6, 51
+src\Repository\EventRepository.php, PHP, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 33, 6, 51
+src\Repository\ParticipantRepository.php, PHP, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 33, 6, 51
+src\Repository\TEventMergeRepository.php, PHP, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 33, 6, 51
+src\Repository\TEventPriorityRepository.php, PHP, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 33, 6, 51
+src\Repository\UserRepository.php, PHP, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 33, 6, 51
+src\tempEntity\DayEvents.php, PHP, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 11, 8, 42
+src\tempEntity\TempEvent.php, PHP, 0, 91, 0, 0, 0, 0, 0, 0, 0, 0, 43, 35, 169
+src\tempEntity\TempEventNext.php, PHP, 0, 41, 0, 0, 0, 0, 0, 0, 0, 0, 23, 15, 79
+templates\account\login.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 30
+templates\account\mainPage.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 17
+templates\admin\index.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 5, 21
+templates\base.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 0, 18
+templates\days\agenda.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 24
+templates\days\dayCreate.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 5, 69
+templates\days\dayDetail.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 45, 0, 0, 0, 0, 2, 47
+templates\days\modifyDay.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 5, 70
+templates\events\create-next.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 44, 0, 0, 0, 0, 1, 45
+templates\events\eventCreate.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 79, 0, 0, 0, 0, 4, 83
+templates\events\eventDetail.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 62, 0, 0, 0, 0, 4, 66
+templates\events\eventSelect.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 0, 18
+templates\events\modifyEvent.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 17
+templates\home\calendar.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 14
+templates\home\faq.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 14
+templates\home\home.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 28, 0, 0, 0, 0, 0, 28
+templates\layout\layout.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 48, 0, 0, 0, 7, 11, 66
+templates\layout\layoutAdmin.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 49, 0, 0, 0, 7, 12, 68
+templates\layout\layoutDay.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 55, 0, 0, 0, 7, 12, 74
+templates\layout\mainLayout.html.twig, HTML (Twig), 0, 0, 0, 0, 0, 0, 45, 0, 0, 0, 3, 8, 56
+tests\.gitignore, Ignore, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+translations\.gitignore, Ignore, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+Total, -, 82, 1907, 195, 0, 31514, 23537, 752, 1758, 3069, 1758, 6215, 9950, 80737

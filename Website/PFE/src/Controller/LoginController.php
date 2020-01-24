@@ -3,7 +3,7 @@
  * ETML
  * Chyzhyk Aleh 
  * 14.11.2019
- * Controller class for login page
+ * Controller class for login pages and user logout
  */
 
 // src/Controller/LoginController.php
@@ -39,12 +39,14 @@ class LoginController extends AbstractController
     {
         $this->session = $session;
     }
-    //TODO : comments
+
     /**
+    * Returns form for login template, connects user
     * @Route("/login", name="login")
     */
     public function Login(Request $request)
     {
+        // Form errors
         $errors=array();
         $user = new TUser();
         
@@ -52,24 +54,25 @@ class LoginController extends AbstractController
         
         $form->handleRequest($request);
 
+        // If form have been validated
         if ($form->isSubmitted() && $form->isValid()) {
             
             // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
             $user = $form->getData(); 
             $pwd = $user->getUsepwd();
 
             //TODO: ADD multiple users with random generated passwords for production
             
+            //Adding user script. Instead of login it creates and connects user, will be removed later
             //$user->setUsepwd(password_hash($user->getUsepwd(),PASSWORD_BCRYPT));
-           // $entityManager = $this->getDoctrine()->getManager();
-           // $entityManager->persist($user);
-           // $entityManager->flush();
+            //$entityManager = $this->getDoctrine()->getManager();
+            //$entityManager->persist($user);
+            //$entityManager->flush();
             
             $repository = $this->getDoctrine()->getRepository(TUser::class);
-            // look for a single Product by name
+            // look for a single user by name
             $foundUser = $repository->findOneBy(['uselogin' => $user->getUselogin()]);
-            
+            //If user doesn't exist - return an error
             if (!$foundUser) {
                 array_push($errors, "L'utilisateur inconnu.");
                 return $this->render('account/login.html.twig', [
@@ -77,7 +80,7 @@ class LoginController extends AbstractController
                     'errors'=>$errors,
                 ]);
             }
-
+            //Checks password
             if(password_verify( $pwd, $foundUser->getUsepwd())){
                 $this->session->set('username', $foundUser->getUselogin());
                 $this->session->set('loggedin', true);
@@ -88,14 +91,15 @@ class LoginController extends AbstractController
                 array_push($errors, "Le mot de passe est incorrect");
             }
         }
-            
+        
         return $this->render('account/login.html.twig', [
             'form' => $form->createView(),
             'errors'=>$errors,
         ]);
     }
 
-     /**
+    /**
+    * Disconnects user
     * @Route("/deconnecter", name="logout")
     */
     public function Disconnect(Request $request)

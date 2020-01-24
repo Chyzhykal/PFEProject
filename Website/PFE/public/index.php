@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * ETML
+ * Author : Chyzhyk Aleh
+ * Date : 16.01.2020
+ * Description : Entry point for the website, auto-generated, do not touch if don't know what's that
+ */
+
 use App\Kernel;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;

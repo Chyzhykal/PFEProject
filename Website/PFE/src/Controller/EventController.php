@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * ETML
+ * Author : Chyzhyk Aleh
+ * Date : 16.01.2020
+ * Description : Day controller - controls agenda, create, detail, modify and delete days for admin
+ * NOTE : activity is the same thing as event, just different name
+ */
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -53,7 +59,7 @@ class EventController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(TEventMerge::class);
         $merges=null;
         $merge=null;
-        if(foundActivity['isMaster']){
+        if($foundActivity['isMaster']){
             $merges=array();
             $children = $repository->findBy(['fkeventmaster'=>$activity]);
             foreach($children as $child){
@@ -110,6 +116,7 @@ class EventController extends AbstractController
     */
     public function addEvent(Request $request, int $idDay)
     {
+        //TODO : limit minutes to day value
         if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
             return $this->redirectToRoute('index');     
         }  
@@ -169,6 +176,7 @@ class EventController extends AbstractController
     public function addEventNext(Request $request, int $idDay)
     {
         //TODO : add name for child activity
+        //TODO : add event and day copy feature
         if(!($this->session->has('loggedin') && $this->session->get('loggedin')==true)){
             return $this->redirectToRoute('index');     
         }   
@@ -264,4 +272,24 @@ class EventController extends AbstractController
             
         ]);
     }
+
+    /* 
+    
+
+
+    {% for event in events %}
+                      {% if event.beginTime == time.key %}
+                        <div class="eventBlock">
+                            {% if day.repeat == true %}
+                                <img src={{asset('images/repeat.png')}} class="repeatIcon"/>
+                            {% else %}
+                                <img src={{asset('images/one.png')}} class="repeatIcon"/>
+                            {% endif %}
+                            <p class="dayName">Nom du jour : {{day.name}}</p>
+                            <p class="dayDate">Date : {{day.date}}</p>
+                            <p class="dayBegin">L'heure de début : {{day.beginTime}}</p>
+                            <p class="dayEnd">L'heure de fin : {{day.endTime}}</p>
+                            <a class="dayDetailBtn sitebtn" href={{ path('dayDetail', { idDay: day.idDay })}}>Afficher les détails</a>
+                        </div>
+                    {% endfor %}*/
 }

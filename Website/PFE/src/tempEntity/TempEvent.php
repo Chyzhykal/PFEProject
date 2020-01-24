@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * ETML
+ * Author : Chyzhyk Aleh
+ * Date : 16.01.2020
+ * Description : Used for event creation, neded for form adaptation
+ */
 namespace App\tempEntity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,7 +16,7 @@ use App\Entity\TEventPriority;
 
 /**
  * TempEvent
- *
+ * Used for event creation, neded for form adaptation
  * 
  */
 class TempEvent

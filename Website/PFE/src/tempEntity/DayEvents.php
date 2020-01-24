@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * ETML
+ * Author : Chyzhyk Aleh
+ * Date : 16.01.2020
+ * Description : Used for chosing a master event when creating child
+ */
 namespace App\tempEntity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,7 +15,7 @@ use App\Entity\TUser;
 
 /**
  * DayEvents
- *
+ * Used for chosing a master event when creating child
  * 
  */
 class DayEvents

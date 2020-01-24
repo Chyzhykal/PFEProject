@@ -15,7 +15,7 @@ class TDay
 {
     /**
      * @var int
-     *
+     * ID
      * @ORM\Column(name="idDay", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -24,7 +24,7 @@ class TDay
 
     /**
      * @var string
-     * 
+     * Name of the day
      * @ORM\Column(name="dayName", type="string", length=45, nullable=false)
      * @Assert\NotBlank
      * @Assert\Type("string")
@@ -39,7 +39,7 @@ class TDay
 
     /**
      * @var string
-     * 
+     * Description
      * @ORM\Column(name="dayDescription", type="string", length=255, nullable=true)
      * @Assert\Type(
      *     type="string",

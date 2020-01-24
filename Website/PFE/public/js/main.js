@@ -1,4 +1,9 @@
-
+/**
+ * ETML
+ * Author : Chyzhyk Aleh
+ * Date : 16.01.2020
+ * Description : scripts downloaded with login template, in general don't touch
+ */
 (function ($) {
     "use strict";
 

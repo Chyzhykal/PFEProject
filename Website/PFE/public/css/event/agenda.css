@@ -1,3 +1,10 @@
+/**
+ * ETML
+ * Author : Chyzhyk Aleh
+ * Date : 16.01.2020
+ * Description : Styles for days and events templates
+ */
+
 .day{
     width: 500px;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
@@ -131,6 +138,7 @@
     display: inline-block;
     font-size: 18px;
     color: rgb(188, 173, 255);
+    margin-right:15px;
 }
 
 .eventAuthor{
@@ -150,5 +158,19 @@
 }
 
 .dayGrid{
+    width:96%;
     display: grid;
+    margin-top:50px;
+    color:#fefefe;
+    border:3px solid white;
+}
+
+.timeColumn, .eventColumn {
+    padding:5px;
+    text-align: center;
+    border:1px solid #fad4d481;
+}
+
+.timeColumn{
+    grid-template-columns: 40px;
 }
