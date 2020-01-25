@@ -216,7 +216,6 @@ class DayController extends AbstractController
             if(!in_array($convertedEvent['beginTime'], $timeTableBegin)){
                 $timeTableBegin[$convertedEvent['beginTime']]=array();
                 array_push($timeTableBegin[$convertedEvent['beginTime']], $convertedEvent);
-                var_dump($timeTableBegin);
             }
             else{
                 array_push($timeTableBegin[$convertedEvent['beginTime']], $convertedEvent);
